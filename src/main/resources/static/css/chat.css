@@ -1,0 +1,42 @@
+@import
+	url("http://fonts.googleapis.com/css?family=Philosopher")
+	;
+
+legend{
+	text-align: center;
+	font-family: 'Philosopher', sans-serif;
+	font-weight: bold;	
+	color: #0B0B3B;
+}
+
+h3{
+	text-align: center;
+}
+
+.tablaLista{
+	margin-left: 100px;
+	border: 1px solid;
+} 
+
+textarea{
+	margin-left: 230px;
+}
+
+.destino{
+	font-family: 'Philosopher', sans-serif;
+	margin-left: 180px;
+}
+
+input, textarea{
+	border-radius: 4px;
+	border: solid 2px #353C63;
+	box-shadow: 5px 5px 5px #888888;
+}
+
+.enviar{
+	margin-left: 330px;
+}
+
+form{
+	margin-top: 50px;
+}

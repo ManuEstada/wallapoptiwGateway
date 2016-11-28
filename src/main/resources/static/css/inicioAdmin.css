@@ -1,0 +1,44 @@
+#container{
+	max-width: 1200px;
+}
+
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+  margin: 80px 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.featurette-heading {
+    font-size: 50px;
+  }
+  
+@media (min-width: 992px) {
+.featurette-heading {
+    margin-top: 120px;
+  }
+}
+
+#menu{
+	margin-left: 240px;
+}
+
+#imagenes1, #imagenes3{
+	margin-top: 100px;
+}
+
+#imagenes2{
+	margin-top: 130px;
+}
+
+#botones1, #botones2, #botones3{
+	margin-left: 220px;
+	font-size: 20px;
+}

@@ -1,0 +1,209 @@
+@import
+	url("http://fonts.googleapis.com/css?family=Arvo")
+	;
+@import
+	url("http://fonts.googleapis.com/css?family=Philosopher")
+	;
+@import
+	url("http://fonts.googleapis.com/css?family=Ubuntu")
+	;
+
+#container{
+	max-width: 1200px;
+}
+
+#menu{
+	margin-left: 240px;
+	margin-bottom: 50px;
+}
+
+#opcionesmenu {
+	position: relative;
+	margin: 25px 10px 10px 40px; 
+	font-family: 'Arvo', serif;
+	list-style: none;
+	color: navy;
+	margin-left: 10px;
+	margin-top:25px;
+	width: 220px;
+	font-size: 16px;
+	float: left;
+}
+	
+#opcionesmenu li a{
+	text-decoration: none;
+	color: navy;	
+}
+
+	
+#tabla{
+	background: #EFFBFB;
+	width:500px;
+	height:auto;
+	margin-left: 280px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+	
+.titulo{ /*De cada seccion del menu*/
+	position:relative;
+	padding: 20px;
+	text-align: center;
+	z-index: 2;	
+	font-size: 30px;
+	font-family: 'Philosopher', sans-serif;
+	font-weight: bold;	
+	color: #0B0B3B;
+}
+	
+.subtitulo{ /*De cada apartado*/
+	position:relative;
+	padding: 10px;
+	text-align: left;
+	margin-left: 10px;
+	z-index: 2;	
+	font-size: 24px;
+	font-family: 'Philosopher', sans-serif;
+	font-weight: bold;
+	color: #585858
+}
+	
+.etiquetas{ /*De los campos de texto*/
+	position:relative;
+	padding: 6px;
+	top:2px;
+	text-align: left;
+	margin-left: 30px;
+	margin-top: 10px;		
+	font-size: 18px;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: bold;
+	color: black;
+}
+	
+	
+.separacion{
+	position: relative;
+	text-align: right;
+	font-size: 18px;
+	color: silver;
+	padding: 50px;
+}
+	
+.edit{
+	margin-left: 610px;
+	margin-top: -50px;
+	cursor:pointer;
+	visibility:hidden;
+}
+	
+.elim{
+	margin-left: 610px;
+	margin-top: 20px;
+	cursor:pointer;
+}
+
+.etiqueta{ /*De los campos de texto*/
+	position:relative;
+	padding: 6px;
+	top:2px;
+	text-align: center;
+	margin-left: 30px;
+	margin-top: 10px;		
+	font-size: 18px;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: bold;
+}
+
+.fav{ /*Div de los productos*/
+	margin-left: 35px;
+	margin-right: 35px;
+	font-size: 16px;
+	font-family: 'Ubuntu', sans-serif;
+	padding:6px;
+	/*	border: 2px dashed navy;*/
+	background-color: #A9D0F5; 
+}
+	
+.tituloFav{
+	margin-left: -10px;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: bolder;
+	font-size:20px;
+	color: #0B0B61;
+	padding: 8px;
+}
+
+.cont{
+	margin-left: 610px;
+	margin-top: -50px;
+	cursor:pointer;
+	visibility:hidden;
+}
+
+input{
+	border-radius: 4px;
+	border: solid 2px #353C63;
+	box-shadow: 5px 5px 5px #888888;
+}
+
+.descripcion{
+	
+	width:300px;
+	height:50px;
+	
+}
+
+
+#tabla2{
+	display:none;
+	margin-left: 35px;
+	margin-right: 35px;
+	font-size: 16px;
+	font-family: 'Ubuntu', sans-serif;
+	padding:15px;
+}
+#fila1{
+	background-color:#2E2EFE;
+}
+#fila2{
+	background-color:#E0E6F8;
+	margin-top:10px;
+}
+#celda1{
+	padding:10px;
+	color:white;
+	font-family: 'Ubuntu', sans-serif;
+	text-align:center;
+}
+#tabla2 label{
+	margin-left:20px;
+	padding:10px;
+	
+}
+
+.imagenesProductos{
+	float: right;
+	width:150px;
+	height:150px;
+	margin-top: -175px;
+}
+
+.borrar{
+	margin-left: 240px;
+	margin-bottom: 30px;
+	font-size:20px;
+}
+
+.eliminarProducto{
+	margin-left: 220px;
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+
+
+
+
+
+

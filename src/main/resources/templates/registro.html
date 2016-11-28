@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="icon" href="images/icono.ico"/>
+    <title>WALLAPOP: Registro</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Custom styles for this template -->
+    <link href="css/login.css" rel="stylesheet"/>
+    <link href="css/registro.css" rel="stylesheet"/>
+    <script type="text/javascript">
+
+	function validacion(){
+	var email = document.getElementById("email").value;
+	var contras1 = document.getElementById("contra1").value;
+	var contras2 = document.getElementById("contra2").value;
+	var nombre = document.getElementById("nomusu").value;
+	var apellido = document.getElementById("apellidos").value;
+	var ciudad = document.getElementById("prov");
+	var optionSelIndex = ciudad.options[ciudad.selectedIndex].value;
+	var expresion = /^[a-z][\w.-]+@\w[\w.-]+\.[\w.-]*[a-z][a-z]$/i;
+	
+	if (email.length == 0){
+		alert("Por favor introduce tu dirección de correo electrónico");
+		return false;
+	}
+	if (!expresion.test(email)){
+		alert("Por favor introduce una dirección de correo electrónico válida");
+		return false;
+	}
+	
+	if (contras1.length == 0){
+		alert("Por favor introduce tu contraseña");
+		return false;
+	}
+	if (contras2.length == 0){
+		alert("Por favor confirma tu contraseña");
+		return false;
+	}
+	if(contras1 != contras2){
+		alert("Las contraseñas no son iguales. Por favor, introduzca la misma contraseña en ambos campos");
+		return false;
+	}
+	if (nombre.length == 0){
+		alert("Por favor introduce tu nombre");
+		return false;
+	}
+	if (apellido.length == 0){
+		alert("Por favor introduce tus apellidos");
+		return false;
+	}
+	if (optionSelIndex == 0) {
+        alert("Por favor introduce tu ciudad de residencia");
+		return false;
+    }
+	//alert("Registro completado con éxito")
+	return true;
+	
+	
+}
+</script>
+</head>
+<body>
+
+    <div class="container">
+      <div class="header clearfix">
+		<img src="images/logo.png" alt="Error en la imagen"/>
+        <h2 class="text-muted">WALLAPOP</h2>
+		<p>Encuentra tu producto ideal</p>
+      </div>
+      
+      <nav>  
+			<ul id="menu">
+				<li><a href="">Inicio</a></li>
+			 	<li><a href="">Mi perfil</a></li>
+			 	<li><a href="">Mis productos</a></li>
+			 	<li><a href="">Catálogo</a></li>
+			 	<li><a href="">Chat</a></li>
+	 		</ul>
+		</nav>
+
+		<div class="jumbotron">		
+		
+		<h2>Crea tu cuenta en "WALLAPOP"</h2>
+		
+		<form id="formulario" action="registro" method="post">
+		
+
+				<div id="info">
+					
+					<h1 id="titul"> DATOS DEL REGISTRO </h1>
+						
+						<p id="introduc">Para registrarse en nuestra página web, deberá rellenar todos los campos. Cuando acabe se le mandará un e-mail, para confirmar su cuenta. Una vez dentro, podrá modificar sus datos entrando en su perfil. </p>
+
+				</div><br /><br />
+				
+				<fieldset id="personal"><legend>INFORMACIÓN DE USUARIO</legend><br />
+					<p>E-mail:<input type="text" id="email" name="email" class="email form-control" tabindex="1" /><br /><br /></p>
+					<p>Contraseña:<input class="form-control" id="contra1" type="password" name="contra1" tabindex="2" /><br /><br /></p>
+					<p>Confirmación de contraseña:<input class="form-control" id="contra2" type="password" name="contrasena" tabindex="3" /><br /><br /></p>
+				</fieldset><br /><br />
+		
+				<fieldset><legend>INFORMACIÓN PERSONAL</legend><br />
+					<p>Nombre de Usuario:<input id="nomusu" class="form-control" type="text" name="nomusu" tabindex="4" /><br /><br /></p>
+					<p>Apellidos:<input id="apellidos" class="form-control" type="text" name="apellidos" tabindex="5" /><br /><br /></p>
+					<p>Provincia:<input id="prov" class="form-control" type="text" name="prov" tabindex="6" /><br /><br /></p>
+					
+				</fieldset><br /><br />
+				
+				<input type="submit" value="Enviar" onclick="return validacion();" class="btn btn-info" />
+		</form>
+
+		</div>
+
+      <div class="footer">
+        <p>&copy; 2016 Wallapop, Inc.</p>
+      </div>
+
+    </div> 
+  </body>
+</html>

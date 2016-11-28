@@ -1,0 +1,18 @@
+@import
+	url("http://fonts.googleapis.com/css?family=Philosopher")
+	;
+
+#tablaGestion{
+	font-family: 'Philosopher', sans-serif;
+}
+
+.fila1{
+	
+	font-weight: bold;	
+	color: #353C63;
+	font-size:18px;
+}
+#menu{
+	margin-bottom: 80px;
+}
+
