@@ -76,6 +76,9 @@ input, select{
 }
 #buscador_avanzado {
 	display: none;
+	
+	margin-left:430px;
+	font-family: 'Philosopher', sans-serif;
 }
 #filtrado{
 	margin-top: 20px;

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="icon" href="images/icono.ico"/>
+    <title>WALLAPOP: Chat</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Custom styles for this template -->
+    <link href="css/login.css" rel="stylesheet"/>
+    <link href="css/chat.css" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="container" id="container">
+      <div class="header clearfix">
+		<img src="images/logo.png" alt="Error en la imagen" />
+        <h2 class="text-muted">WALLAPOP</h2>
+		<p>Encuentra tu producto ideal</p>
+      </div>
+		<h3>Lista de mensajes</h3>
+	<table class="tablaLista">
+		<thead>
+
+			<tr>
+				<th>De</th>
+				<th>Mensaje</th>
+			</tr>
+
+		</thead>
+		<tbody>
+			<!-- AQUI SE RECUPERAN LOS MENSAJES DEL USUARIO DE LA BD -->
+		</tbody>
+	</table>
+	
+	<form action="mensajes" method="post">
+	<fieldset>
+		<legend>CHAT de la aplicación WALLAPOP</legend>
+		<textarea name="mensaje" id="mensaje" cols="30" rows="10"></textarea><br /><br />
+		<p class="destino">Indica el correo del destinatario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="to" /></p>
+		<br/>
+		<input class="btn btn-primary enviar" type="submit" value="Enviar" />
+		<input type="hidden"  name="from" value="" />
+	</fieldset>
+	</form>
+	<p>
+		<a class ="btn btn-info" href="javascript:history.go(-1)">Volver</a>
+	</p>
+	 <div class="footer">
+		<p>&copy; 2016 Wallapop, Inc.</p>
+    </div>
+    </div>
+</body>
+</html>

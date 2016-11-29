@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="icon" href="images/icono.ico"/>
+    <title>WALLAPOP: Gestión de productos</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Custom styles for this template -->
+    <link href="css/login.css" rel="stylesheet"/>
+    <link href="css/gestion.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container" id="container">
+      <div class="header clearfix">
+		<img src="images/logo.png" alt="Error en la imagen" />
+        <h2 class="text-muted">WALLAPOP</h2>
+		<p>Encuentra tu producto ideal</p>
+      </div>
+      
+      <nav>  
+			<ul id="menu">
+				<li><a href="inicioAdmin">Inicio</a></li>
+			 	<li><a href="adminusuario">Gestión de usuarios</a></li>
+			 	<li><a href="adminproducto">Gestión de productos</a></li>
+			 	<li><a href="chat">Chat</a></li>
+	 		</ul>
+		</nav>
+	  	  <table id="tablaGestion" class="table" >
+	  <thead>
+	  	<tr class="fila1"><td>Titulo</td><td>Categoria</td><td>Descripcion</td><td>Precio</td><td>Estado</td><td></td><td></td></tr>
+	  </thead>
+	  <tbody>
+	  <!-- AQUI VAN TODOS LOS PRODUCTOS DE LA BASE DE DATOS -->
+	  </tbody>
+	  </table>
+	  <p>
+		<a class ="btn btn-info" href="javascript:history.go(-1)">Volver</a>
+	</p>
+	<div class="footer">
+		<p>&copy; 2016 Wallapop, Inc.</p>
+    </div>
+
+    </div>  
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="icon" href="images/icono.ico"/>
+    <title>WALLAPOP: Catálogo de productos</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Custom styles for this template -->
+    <link href="css/login.css" rel="stylesheet"/>
+    <link href="css/catalogo.css" rel="stylesheet"/>
+    <script type="text/javascript">
+     
+     function formAvanzada() {
+    	    var x = document.getElementById('buscador_avanzado');
+    	    if (x.style.display === 'none') {
+    	        x.style.display = 'block';
+    	    } else {
+    	        x.style.display = 'none';
+    	    }
+    	}
+     
+     </script>
+</head>
+<body>
+<div class="container" id="container">
+		<div class="header clearfix">
+			<img src="images/logo.png" alt="Error en la imagen" />
+			<h2 class="text-muted">WALLAPOP</h2>
+			<p>Encuentra tu producto ideal</p>
+		</div>
+		
+		<nav>  
+			<ul id="menu">
+				<li><a href="inicioCliente">Inicio</a></li>
+			 	<li><a href="perfil">Mi perfil</a></li>
+			 	<li><a href="productos">Mis productos</a></li>
+			 	<li><a href="catalogo">Catálogo</a></li>
+			 	<li><a href="chat">Chat</a></li>
+	 		</ul>
+		</nav>	
+		
+	<form id="form_buscador" action="catalogo" method="post">
+		<table id="buscador">
+			<tr><td id="celda1"><b>Buscador de productos</b></td></tr> 
+			<tr id="fila2">
+			<td id="celda2">
+				<span>Buscar producto:
+				<input type="text" name="texto" class="buscarProd" /></span>
+				<span><button type="submit" value="Buscar" id="buscar" class="buscar btn btn-primary">Buscar</button></span><br /><br />
+			</td> 
+			</tr> 
+			<tr ><td id="avanzada"><a onclick="formAvanzada()" class="avanzada">+ Búsqueda avanzada</a></td></tr>
+		</table>
+	</form>
+		
+	<form id="form_buscador_avanzado" action="catalogo" method="post">
+		<table id="buscador_avanzado">
+			<tr><td id="celda1"><b>Buscador de productos avanzado</b></td></tr> 
+			<tr id="busqueda_avanzada">
+			<td>
+			<ul id="filtrado">
+				<li>Categoria: <select class="categorias" name="categoria" id="categ" >
+						<option value="Cualquiera" selected="selected">Cualquier categoria</option>
+						<option value="Mobiliario">Mobiliario</option>
+						<option value="Vehiculos">Vehículos</option>
+						<option value="Moda y belleza">Moda y belleza</option>
+						<option value="Electronica">Electrónica</option>
+						<option value="Ocio">Ocio y deportes</option>
+						<option value="Otros">Otros</option>
+				</select></li>
+				<li>Provincia: <input class="provincias" name="provincia" id="prov" value="" /></li>
+				<li>Vendedor: <input type="text" name="vendedor" class="vendedor" value="" /></li>
+				<li>Título: <input type="text" name="titulo" class="tituloAvanzada" value="" /></li>
+				<li>Descripción: <input type="text" name="descripcion" class="descripcionAvanzada" value="" /></li>
+			</ul> 
+				<span><button type="submit" value="Buscar" id="buscar" class="buscar btn btn-primary">Buscar</button></span><br /><br />
+			</td>
+		</tr>
+			
+		</table>
+	</form>
+	<br /><br />
+	
+		 <!-- AQUI SE METERIAN TODOS LOS PRODUCTOS DE LA BASE DE DATOS -->
+		 <!--
+		<div class='fav' id='fav1'> 
+		
+				<h4 class='tituloFav'><%= prod.getTitulo() %></h4>
+				<p><b>Categoria:</b>&nbsp;&nbsp;&nbsp;<span class="categoria"><%= prod.getCategoria() %></span><br><br></p>
+				<p><b>Descripcion:</b>&nbsp;&nbsp;&nbsp;<span class="descripcion"><%= prod.getDescripcion() %></span><br><br></p>
+				<% //<img src="images/cajones.jpg" class="img-circle imagenesProductos" alt="Cajones blancos">%>
+				<p><b>Precio:</b>&nbsp;&nbsp;&nbsp;<span class="precio"><%= prod.getPrecio() %></span><br><br></p>
+				<p><b>Estado:</b>&nbsp;&nbsp;&nbsp;<span class="estado"><%= prod.getEstado() %></span></p>
+		</div> 
+		
+
+		-->
+		
+		<p>
+		<a class ="btn btn-info" href="javascript:history.go(-1)">Volver</a>
+		</p>
+		<div class="footer">
+			<p>&copy; 2016 Wallapop, Inc.</p>
+		</div>
+
+    </div> 
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="icon" href="images/icono.ico"/>
+    <title>WALLAPOP: Inicio</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Custom styles for this template -->
+    <link href="css/login.css" rel="stylesheet"/>
+    <link href="css/inicioAdmin.css" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="container" id="container">
+      <div class="header clearfix">
+		<img src="images/logo.png" alt="Error en la imagen" />
+        <h2 class="text-muted">WALLAPOP</h2>
+		<p>Encuentra tu producto ideal</p>
+      </div>
+      
+      <nav>  
+			<ul id="menu">
+				<li><a href="inicioAdmin">Inicio</a></li>
+			 	<li><a href="adminusuario">Gestión de usuarios</a></li>
+			 	<li><a href="adminproducto">Gestión de productos</a></li>
+			 	<li><a href="chat">Chat</a></li>
+	 		</ul>
+		</nav>
+	 
+	<!-- START THE FEATURETTES -->
+
+      <hr class="featurette-divider" />
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Gestiona los usuarios. <span class="text-muted">Bajas y modificaciones.</span></h2>
+          <p class="lead">Accede al registro de los usuarios de la aplicación. En él se recojen los datos de todos los usuarios y podrás modificar los datos que ellos deseen, así como darlos de baja.</p>
+			<button onclick="window.location='adminusuario';" id="botones1" class="btn btn-info">Registro de usuarios</button>
+		</div>
+        <div class="col-md-5">
+          <img id="imagenes1" class="featurette-image img-responsive center-block" src="images/usuario.png" alt="Usuarios" />
+        </div>
+      </div>
+
+      <hr class="featurette-divider" />
+
+      <div class="row featurette">
+        <div class="col-md-7 col-md-push-5">
+          <h2 class="featurette-heading">Gestiona los productos. <span class="text-muted">Modificaciones y bajas del catálogo.</span></h2>
+          <p class="lead">Accede al registro de los productos de la aplicación. En él se recojen los datos de todos los productos del catálogo y podrás modificar los datos que los usuarios deseen, así como darlos de baja.</p>
+			<button onclick="window.location='adminproducto';" id="botones2" class="btn btn-info">Catálogo de productos</button>
+		</div>
+        <div class="col-md-5 col-md-pull-7">
+          <img id="imagenes2" class="featurette-image img-responsive center-block" src="images/productos.jpg" alt="Generic placeholder image" />
+        </div>
+      </div>
+
+      <hr class="featurette-divider" />
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Comunicate con otros usuarios. <span class="text-muted">Chatea.</span></h2>
+          <p class="lead">En esta sección podrás iniciar un chat con cualquier usuario de la aplicación.</p>
+			<button onclick="window.location='chat';" id="botones3" class="btn btn-info">Chat</button>
+	   </div>
+        <div class="col-md-5">
+          <img id="imagenes3" class="featurette-image img-responsive center-block" src="images/chat.png" alt="Generic placeholder image" />
+        </div>
+      </div>
+
+      <hr class="featurette-divider" />
+
+      <!-- /END THE FEATURETTES -->
+	  
+	  
+	  
+	<div class="footer">
+		<p>&copy; 2016 Wallapop, Inc.</p>
+    </div>
+
+    </div>  
+</body>
+</html>

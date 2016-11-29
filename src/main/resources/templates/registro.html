@@ -17,8 +17,8 @@
 	var contras2 = document.getElementById("contra2").value;
 	var nombre = document.getElementById("nomusu").value;
 	var apellido = document.getElementById("apellidos").value;
-	var ciudad = document.getElementById("prov");
-	var optionSelIndex = ciudad.options[ciudad.selectedIndex].value;
+	var ciudad = document.getElementById("prov").value;
+	
 	var expresion = /^[a-z][\w.-]+@\w[\w.-]+\.[\w.-]*[a-z][a-z]$/i;
 	
 	if (email.length == 0){
@@ -50,7 +50,7 @@
 		alert("Por favor introduce tus apellidos");
 		return false;
 	}
-	if (optionSelIndex == 0) {
+	if (ciudad.length == 0) {
         alert("Por favor introduce tu ciudad de residencia");
 		return false;
     }

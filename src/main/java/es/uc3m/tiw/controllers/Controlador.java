@@ -16,8 +16,44 @@ public class Controlador {
 		return "registro";
 	}
 	
+	@RequestMapping("/inicioCliente")
+	public String inicio(){
+		return "inicioCliente";
+	}
 	
+	@RequestMapping("/perfil")
+	public String perfil(){
+		return "miPerfil";
+	}
 	
-
+	@RequestMapping("/productos")
+	public String productos(){
+		return "misProductos";
+	}
+	
+	@RequestMapping("/catalogo")
+	public String catalogo(){
+		return "catalogo";
+	}
+	
+	@RequestMapping("/chat")
+	public String chat(){
+		return "chat";
+	}
+	
+	@RequestMapping("/inicioAdmin")
+	public String inicioAdmin(){
+		return "inicioAdmin";
+	}
+	
+	@RequestMapping("/adminusuario")
+	public String adminusuario(){
+		return "gestionUsuarios";
+	}
+	
+	@RequestMapping("/adminproducto")
+	public String adminproducto(){
+		return "gestionProductos";
+	}
 
 }
