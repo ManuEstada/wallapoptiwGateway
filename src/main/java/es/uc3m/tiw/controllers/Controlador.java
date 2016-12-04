@@ -4,17 +4,23 @@ package es.uc3m.tiw.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestTemplate;
 
 import es.uc3m.tiw.dominios.Cliente;
 
 
 @Controller
+@SessionAttributes(Controlador.USUARIO_SESSION)
 public class Controlador {
 
+	public static final String USUARIO_SESSION = "usuario";
+	public static final String ERROR = "error";
+	
 	@Autowired
 	private RestTemplate restTemplate;
 	
@@ -31,32 +37,60 @@ public class Controlador {
 		cliente.setCorreo(correo);
 		cliente.setContrasena(contrasena);
 
-		cliente = restTemplate.postForObject("http://localhost:8010/validar",                                               
-				cliente, Cliente.class);
-/*
-		Client client = ClientBuilder.newClient();
-		WebTarget webResource = client.target("http://localhost:8081").path(operation)
-				.queryParam("operand1", operands.getOperand1())
-				.queryParam("operand2", operands.getOperand2());
-		Result result=	webResource.request().accept("application/json").get(Result.class);
-		*/
-		return "inicioCliente";
+		cliente = restTemplate.postForObject("http://localhost:8010/validar", cliente, Cliente.class);
+		
+		if(cliente == null) {
+			model.addAttribute(Controlador.ERROR, true);
+			return "login";
+		} else {
+			model.addAttribute(Controlador.USUARIO_SESSION, cliente);
+			if (cliente.isEsAdmin()) {
+				return "redirect:inicioAdmin";
+			} else {
+				return "redirect:inicioCliente";
+			}
+		}
 	}
 	
-	@RequestMapping("/registro")
-	public String registro(){
+	@RequestMapping(value = "/registro", method = RequestMethod.GET)
+	public String registroGet(){
 		return "registro";
 	}
+	
+	@RequestMapping(value = "/registro", method = RequestMethod.POST)
+	public String registroPost(Model model, @ModelAttribute Cliente cliente){
+		
+		boolean resultado = restTemplate.postForObject("http://localhost:8010/add", cliente, boolean.class);
+		
+		if(resultado) {
+			cliente = restTemplate.postForObject("http://localhost:8010/findByCorreo", cliente.getCorreo(), Cliente.class);
+			model.addAttribute(Controlador.USUARIO_SESSION, cliente);
+			return "redirect:inicioCliente";
+		} else {
+			model.addAttribute(Controlador.ERROR, true);
+			return "registro";
+		}
+	}
+	
 	
 	@RequestMapping("/inicioCliente")
 	public String inicio(){
 		return "inicioCliente";
 	}
 	
-	@RequestMapping("/perfil")
-	public String perfil(){
+	
+	@RequestMapping(value = "/perfil", method = RequestMethod.GET)
+	public String perfilGet(){
 		return "miPerfil";
 	}
+
+	@RequestMapping(value = "/perfil", method = RequestMethod.POST)
+	public String perfilPost(Model model, @ModelAttribute Cliente cliente){
+		restTemplate.postForObject("http://localhost:8010/modify", cliente, boolean.class);
+		model.addAttribute(Controlador.USUARIO_SESSION, cliente);
+		return "miPerfil";
+	}
+	
 	
 	@RequestMapping("/productos")
 	public String productos(){
@@ -87,5 +121,5 @@ public class Controlador {
 	public String adminproducto(){
 		return "gestionProductos";
 	}
-	
+
 }

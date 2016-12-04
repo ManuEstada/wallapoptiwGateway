@@ -49,6 +49,7 @@
 		<tr>
 			<td>
 				<div id="informacionPersonal">
+					<form action="perfil" method="post">
 					<h1 class="titulo">INFORMACIÓN PERSONAL</h1>
 					
 					<a class="elim btn btn-warning" id="edit1">Editar</a>
@@ -56,9 +57,9 @@
 					<h3 class='subtitulo'>Datos personales</h3>
 						
 					<div id='datospersonales'>
-						<p class='etiquetas'><b>Nombre:&nbsp;&nbsp;&nbsp;</b><input class="nombrecompleto" type="text" name="nombrecompleto" tabindex="1" id='name' readonly="readonly" value="" /><br /><br /></p>
-						<p class='etiquetas'><b>Apellidos:&nbsp;&nbsp;&nbsp;</b><input class="apellidos" type="text" name="apellidos" tabindex="2" id='apellido' readonly="readonly" value="" /><br /><br /></p>
-						<p class='etiquetas'><b>Provincia:&nbsp;</b><input type="text" name="ciudad" id="ciudad" tabindex="3" readonly="readonly" value=""/><br/></p>
+						<p class='etiquetas'><b>Nombre:&nbsp;&nbsp;&nbsp;</b><input class="nombrecompleto" type="text" name="nombre" tabindex="1" id='name'  value="" /><br /><br /></p>
+						<p class='etiquetas'><b>Apellidos:&nbsp;&nbsp;&nbsp;</b><input class="apellidos" type="text" name="apellidos" tabindex="2" id='apellido' value="" /><br /><br /></p>
+						<p class='etiquetas'><b>Provincia:&nbsp;</b><input type="text" name="provincia" id="ciudad" tabindex="3"  value=""/><br/></p>
 					</div>
 					
 					<div class='separacion'>
@@ -68,11 +69,16 @@
 					<h3 class='subtitulo'>Datos de usuario</h3>
 						
 					<div id='datosusuario'>
+						<input type="hidden" name="id" value="3" />
+						<input type="hidden" name="correo" value="carolina@hotmail.com" />
 						<p class='etiquetas'><b>E-mail:&nbsp;&nbsp;&nbsp;</b><input type="text" class="email" tabindex="4" id='correo' readonly="readonly" value="" /><br /><br /></p>
 						<p class='etiquetas' ><b>Contraseña:&nbsp;</b><input class="contrasena" name="contrasena" type="text" tabindex="5" id ='pass' readonly="readonly" value="" /><br /><br /></p>
 					</div>
+					<button type="submit" value="Guardar"></button>
+					</form>
 					<a class='btn btn-danger borrar' onclick="return eliminar();" href=""  > 
 					Darse de baja en la aplicación</a>
+					
 					
 				</div>
 					
