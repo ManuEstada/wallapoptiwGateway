@@ -3,6 +3,7 @@ package es.uc3m.tiw.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestTemplate;
 
+
 import es.uc3m.tiw.dominios.Cliente;
+import es.uc3m.tiw.dominios.Mensaje;
+import es.uc3m.tiw.dominios.Producto;
 
 
 @Controller
@@ -97,13 +101,26 @@ public class Controlador {
 		return "misProductos";
 	}
 	
-	@RequestMapping("/catalogo")
-	public String catalogo(){
+	@RequestMapping(value = "/catalogo", method = RequestMethod.GET)
+	public String catalogoGet(Model modelo){
+		ResponseEntity<Producto[]> responseEntity = restTemplate.getForEntity("http://localhost:8020/listarProductos", Producto[].class);
+		Producto[] productos = responseEntity.getBody();
+		modelo.addAttribute("productos",productos);
 		return "catalogo";
 	}
 	
-	@RequestMapping("/chat")
-	public String chat(){
+	@RequestMapping(value = "/chat", method = RequestMethod.GET)
+	public String chatGet(Model modelo, @ModelAttribute Mensaje mensaje){
+		//Metodo que muestra los mensajes y los emisores de los mismos de un receptor
+		ResponseEntity<Mensaje[]> responseEntity = restTemplate.getForEntity("http://localhost:8030/listarMensajes", Mensaje[].class);
+		Mensaje[] mensajes = responseEntity.getBody();
+		modelo.addAttribute("mensajes", mensajes);
+		return "chat";
+	}
+	
+	@RequestMapping(value = "/chat", method = RequestMethod.POST)
+	public String chatPost(Model model, @ModelAttribute Mensaje mensaje){
+		restTemplate.postForObject("http://localhost:8030/guardarMensaje", mensaje, boolean.class);
 		return "chat";
 	}
 	

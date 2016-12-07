@@ -11,7 +11,11 @@
     <link href="css/perfilCliente.css" rel="stylesheet"/>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
      <script type="text/javascript">
-     
+     function cerrar(){
+     	alert("Acaba de cerrar sesión. Se le redirigirá a la pantalla inicial de la aplicación.");
+     	window.location = "login.html";
+     }
+
      function tabla() {
     	    var x = document.getElementById('tabla2');
     	    if (x.style.display === 'none') {
@@ -30,6 +34,7 @@
 		<img src="images/logo.png" alt="Error en la imagen" />
         <h2 class="text-muted">WALLAPOP</h2>
 		<p>Encuentra tu producto ideal</p>
+		<button class="btn btn-warning" onclick="return cerrar();">Cerrar sesión</button>
       </div>
       
       <nav>  

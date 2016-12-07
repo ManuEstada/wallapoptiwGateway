@@ -9,6 +9,14 @@
     <!-- Custom styles for this template -->
     <link href="css/login.css" rel="stylesheet"/>
     <link href="css/inicioCliente.css" rel="stylesheet"/>
+    <script type="text/javascript">
+    
+    function cerrar(){
+    	alert("Acaba de cerrar sesión. Se le redirigirá a la pantalla inicial de la aplicación.");
+    	window.location = "login.html";
+    }
+    
+    </script>
 </head>
 
 <body>
@@ -17,6 +25,7 @@
 		<img src="images/logo.png" alt="Error en la imagen"/>
         <h2 class="text-muted">WALLAPOP</h2>
 		<p>Encuentra tu producto ideal</p>
+		<button class="btn btn-warning" onclick="return cerrar();">Cerrar sesión</button>
       </div>
 	
 	<nav>  

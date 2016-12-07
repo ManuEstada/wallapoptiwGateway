@@ -11,8 +11,12 @@
     <link href="css/perfilCliente.css" rel="stylesheet"/>
     
     <script type="text/javascript">
-	
-	function eliminar(){
+    function cerrar(){
+    	alert("Acaba de cerrar sesión. Se le redirigirá a la pantalla inicial de la aplicación.");
+    	window.location = "login.html";
+    }
+
+    function eliminar(){
 	confirm("¿Esta seguro que quiere darse de baja en la aplicación? Al hacerlo se le eliminaran automáticamente los productos que tiene puestos en su perfil.");
 	}
 	
@@ -26,6 +30,7 @@
 		<img src="images/logo.png" alt="Error en la imagen" />
         <h2 class="text-muted">WALLAPOP</h2>
 		<p>Encuentra tu producto ideal</p>
+		<button class="btn btn-warning" onclick="return cerrar();">Cerrar sesión</button>
       </div>
       
       <nav>  
