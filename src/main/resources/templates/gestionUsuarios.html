@@ -38,10 +38,18 @@
 		</nav>
 	  <table id="tablaGestion" class="table" >
 	  <thead>
-	  	<tr class="fila1"><td>Nombre</td><td>Apellido</td><td>Contraseña</td><td>Correo</td><td>Provincia</td><td></td><td></td></tr>
+	  	<tr class="fila1"><td>Nombre</td><td>Apellido</td><td>Correo</td><td>Provincia</td><td></td><td></td></tr>
+	  	
 	  </thead>
 	  <tbody>
-	  <!-- AQUI METER LOS USUARIOS DE LA BASE DE DATOS -->
+		<tr class='fila1' th:each="usuario : ${usuarios}"> 
+			<td th:text="${usuario.nombre}"></td>
+			<td th:text="${usuario.apellidos}"></td>
+			<td th:text="${usuario.correo}"></td>
+			<td th:text="${usuario.provincia}"></td>
+			<td><a href="admineditarusuario?id=${usuario.id}" title="Editar usuario ${usuario.nombre}" >Editar</a></td>
+			<td><a href="admineliminarusuario?id=${usuario.id}" title="Eliminar usuario ${usuario.nombre}" >Eliminar</a></td>
+		</tr>
 	  </tbody>
 	  </table>
 	  <p>

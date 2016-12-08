@@ -3,6 +3,8 @@ package es.uc3m.tiw.dominios;
 import java.io.Serializable;
 
 
+
+
 public class Producto implements Serializable{
 	
 private static final long serialVersionUID = 1L;
@@ -55,6 +57,8 @@ private static final long serialVersionUID = 1L;
 	private String precio;
 
 	private String estado;
+
+	private long clienteID;
 	/*@Lob
 	@Column (name= "imagen")
 	private byte[] imagen;*/
@@ -68,14 +72,23 @@ private static final long serialVersionUID = 1L;
 		super();
 	}
 
-	public Producto(String titulo, String categoria, String descripcion, String precio, String estado) {
+	public Producto(String titulo, String categoria, String descripcion, String precio, String estado, long clienteID) {
 		super();
 		this.titulo = titulo;
 		this.categoria = categoria;
 		this.descripcion = descripcion;
 		this.precio = precio;
 		this.estado = estado;
+		this.clienteID = clienteID;
 		//this.duenoProducto = duenoProducto;
+	}
+
+	public long getClienteID() {
+		return clienteID;
+	}
+
+	public void setClienteID(long clienteID) {
+		this.clienteID = clienteID;
 	}
 
 	public long getId() {

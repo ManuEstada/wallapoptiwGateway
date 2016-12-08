@@ -1,6 +1,11 @@
 package es.uc3m.tiw.controllers;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestTemplate;
 
 
@@ -19,22 +23,22 @@ import es.uc3m.tiw.dominios.Producto;
 
 
 @Controller
-@SessionAttributes(Controlador.USUARIO_SESSION)
 public class Controlador {
 
-	public static final String USUARIO_SESSION = "usuario";
+	public static final String USUARIO_SESSION = "usuario_sesion";
 	public static final String ERROR = "error";
 	
 	@Autowired
 	private RestTemplate restTemplate;
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginGet(){
 		return "login";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginPost(Model model,
+	public String loginPost(HttpServletRequest request,
+							Model model,
 							@RequestParam("correo") String correo,
 							@RequestParam("contrasena") String contrasena){
 		Cliente cliente = new Cliente();
@@ -47,7 +51,7 @@ public class Controlador {
 			model.addAttribute(Controlador.ERROR, true);
 			return "login";
 		} else {
-			model.addAttribute(Controlador.USUARIO_SESSION, cliente);
+			request.getSession().setAttribute(Controlador.USUARIO_SESSION, cliente);
 			if (cliente.isEsAdmin()) {
 				return "redirect:inicioAdmin";
 			} else {
@@ -97,23 +101,89 @@ public class Controlador {
 	
 	
 	@RequestMapping(value = "/productos", method = RequestMethod.GET)
-	public String productosGet(Model modelo){
-		modelo.addAttribute(new Producto());
+	public String productosGet(HttpServletRequest request, Model modelo){
+		Cliente clienteSesion = (Cliente) request.getSession().getAttribute(USUARIO_SESSION);
+		Producto[] productos = restTemplate.postForObject("http://localhost:8020/findByClienteID", clienteSesion.getId(), Producto[].class);
+		modelo.addAttribute("productos", productos);
 		//Aqui se muestran los productos del cliente de la BD
 		return "misProductos";
 	}
 	
 	@RequestMapping(value = "/productos", method = RequestMethod.POST)
-	public String productosPost(@ModelAttribute Producto producto){
-		restTemplate.postForObject("http://localhost:8020/anadirProducto", producto, Producto.class);
-		return "misProductos";
+	public String productosPost(HttpServletRequest request, Model modelo, @ModelAttribute Producto producto){
+		try {
+			restTemplate.postForObject("http://localhost:8020/anadirProducto", producto, Producto.class);
+			return "misProductos";
+		} catch (Exception ex) {
+			boolean resultado = restTemplate.postForObject("http://localhost:8020/modificar", producto, boolean.class);
+			if(resultado) {
+				//Cliente clienteSesion = (Cliente) request.getSession().getAttribute(USUARIO_SESSION);
+				//Producto[] productos = restTemplate.postForObject("http://localhost:8020/findByClienteID", clienteSesion.getId(), Producto[].class);
+				//modelo.addAttribute("productos", productos);
+				//Aqui se muestran los productos del cliente de la BD
+				return "redirect:productos";
+			} else {
+				modelo.addAttribute(Controlador.ERROR, true);
+				return "miProducto";
+			}
+		}
 	}
+
+	@RequestMapping(value = "/editarproducto", method = RequestMethod.GET)
+	public String editarProductoGet(Model modelo, @RequestParam(name="id") long id){
+		Producto producto = restTemplate.postForObject("http://localhost:8020/findByID", id, Producto.class);
+		modelo.addAttribute("producto",producto);
+		return "miProducto";
+	}
+
+	@RequestMapping(value = "/editarproducto", method = RequestMethod.POST)
+	public String editarProductoPost(HttpServletRequest request, Model modelo, @ModelAttribute Producto producto){
+		boolean resultado = restTemplate.postForObject("http://localhost:8020/modificar", producto, boolean.class);
+		if(resultado) {
+			//Cliente clienteSesion = (Cliente) request.getSession().getAttribute(USUARIO_SESSION);
+			//Producto[] productos = restTemplate.postForObject("http://localhost:8020/findByClienteID", clienteSesion.getId(), Producto[].class);
+			//modelo.addAttribute(productos);
+			//Aqui se muestran los productos del cliente de la BD
+			return "redirect:productos";
+		} else {
+			modelo.addAttribute(Controlador.ERROR, true);
+			return "miProducto";
+		}
+	}
+	
 	
 	@RequestMapping(value = "/catalogo", method = RequestMethod.GET)
 	public String catalogoGet(Model modelo){
 		ResponseEntity<Producto[]> responseEntity = restTemplate.getForEntity("http://localhost:8020/listarProductos", Producto[].class);
 		Producto[] productos = responseEntity.getBody();
 		modelo.addAttribute("productos",productos);
+		return "catalogo";
+	}
+
+	@RequestMapping(value = "/buscador", method = RequestMethod.GET)
+	public String catalogoGet(Model modelo, @RequestParam(name="text") String texto){
+		Producto[] productos = restTemplate.postForObject("http://localhost:8020/findByText", texto, Producto[].class);
+		modelo.addAttribute("productos",productos);
+		return "catalogo";
+	}
+	
+	@RequestMapping(value = "/buscador", method = RequestMethod.POST)
+	public String catalogoPost(Model modelo, @ModelAttribute Producto producto, 
+											 @RequestParam("vendedor") String vendedor, 
+											 @RequestParam("provincia") String provincia){
+		Cliente tempCliente;
+		List<Producto> resultado = new ArrayList<Producto>();
+		Producto[] productos = restTemplate.postForObject("http://localhost:8020/findByProduct", producto, Producto[].class);
+		for(Producto p : productos) {
+			tempCliente = restTemplate.postForObject("http://localhost:8010/findByID", p.getClienteID(), Cliente.class);
+			if((provincia == null || "".equals(provincia) || tempCliente.getProvincia().toUpperCase().contains(provincia.toUpperCase())) &&
+				(vendedor == null || "".equals(vendedor) || 
+							tempCliente.getNombre().toUpperCase().contains(vendedor.toUpperCase()) ||
+							tempCliente.getApellidos().toUpperCase().contains(vendedor.toUpperCase()))) {
+				resultado.add(p);
+			}
+		}
+		modelo.addAttribute("productos", resultado);
 		return "catalogo";
 	}
 	
@@ -137,9 +207,39 @@ public class Controlador {
 		return "inicioAdmin";
 	}
 	
-	@RequestMapping("/adminusuario")
-	public String adminusuario(){
+	@RequestMapping(value = "/adminusuario", method = RequestMethod.GET)
+	public String adminusuario(Model modelo){
+		Cliente[] resultado = restTemplate.postForObject("http://localhost:8010/getAll", null, Cliente[].class);
+		modelo.addAttribute("usuarios", resultado);
 		return "gestionUsuarios";
+	}
+
+	@RequestMapping(value = "/admineditarusuario", method = RequestMethod.GET)
+	public String admineditarusuarioGet(Model modelo, @RequestParam("id") long id){
+		Cliente resultado = restTemplate.postForObject("http://localhost:8010/findByID", id, Cliente.class);
+		modelo.addAttribute("usuario_edicion", resultado);
+		return "editarUsuario";
+	}
+
+	@RequestMapping(value = "/admineditarusuario", method = RequestMethod.POST)
+	public String admineditarusuarioPost(Model modelo, @ModelAttribute Cliente cliente){
+		boolean resultado = restTemplate.postForObject("http://localhost:8010/modify", cliente, boolean.class);
+		if(resultado) {
+			Cliente[] lista = restTemplate.postForObject("http://localhost:8010/getAll", null, Cliente[].class);
+			modelo.addAttribute("usuarios", lista);
+			return "redirect:adminusuario";
+		} else {
+			modelo.addAttribute(Controlador.ERROR, true);
+			return "editarUsuario";
+		}
+	}
+
+	@RequestMapping(value = "/admineliminarusuario", method = RequestMethod.GET)
+	public String admineliminarusuario(Model modelo, @RequestParam("id") long id){
+		restTemplate.postForObject("http://localhost:8010/delete", id, boolean.class);
+		Cliente[] lista = restTemplate.postForObject("http://localhost:8010/getAll", null, Cliente[].class);
+		modelo.addAttribute("usuarios", lista);
+		return "redirect:adminusuario";
 	}
 	
 	@RequestMapping("/adminproducto")

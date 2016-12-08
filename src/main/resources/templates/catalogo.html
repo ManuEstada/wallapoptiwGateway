@@ -50,13 +50,13 @@
 	 		</ul>
 		</nav>	
 		
-	<form id="form_buscador" action="catalogo" method="post">
+	<form id="form_buscador" action="buscador" method="get">
 		<table id="buscador">
 			<tr><td id="celda1"><b>Buscador de productos</b></td></tr> 
 			<tr id="fila2">
 			<td id="celda2">
 				<span>Buscar producto:
-				<input type="text" name="texto" class="buscarProd" /></span>
+				<input type="text" name="text" class="buscarProd" /></span>
 				<span><button type="submit" value="Buscar" id="buscar" class="buscar btn btn-primary">Buscar</button></span><br /><br />
 			</td> 
 			</tr> 
@@ -64,14 +64,14 @@
 		</table>
 	</form>
 		
-	<form id="form_buscador_avanzado" action="catalogo" method="post">
+	<form id="form_buscador_avanzado" action="buscador" method="post">
 		<table id="buscador_avanzado">
 			<tr><td id="celda1"><b>Buscador de productos avanzado</b></td></tr> 
 			<tr id="busqueda_avanzada">
 			<td>
 			<ul id="filtrado">
 				<li>Categoria: <select class="categorias" name="categoria" id="categ" >
-						<option value="Cualquiera" selected="selected">Cualquier categoria</option>
+						<option value="" selected="selected">Cualquier categoria</option>
 						<option value="Mobiliario">Mobiliario</option>
 						<option value="Vehiculos">Vehículos</option>
 						<option value="Moda y belleza">Moda y belleza</option>
