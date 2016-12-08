@@ -34,19 +34,19 @@
 				<th>De</th>
 				<th>Mensaje</th>
 			</tr>
-			<!-- AQUI SE RECUPERAN LOS MENSAJES DEL USUARIO DE LA BD -->
+			<!-- AQUI SE RECUPERAN LOS MENSAJES DEL USUARIO DE LA BD 
 			<tr th:each="mensaje : ${mensajes}">
 				<td th:text="${mensaje.from}"></td>
 				<td th:text="${mensaje.mensaje}"></td>
-			</tr>
+			</tr>-->
 
 	</table>
 	
-	<form action="chat" method="post">
+	<form th:action="@{/chat}" th:object="${mensaje}" method="post">
 	<fieldset>
 		<legend>CHAT de la aplicación WALLAPOP</legend>
-		<textarea name="mensaje" id="mensaje" cols="30" rows="10"></textarea><br /><br />
-		<p class="destino">Indica el correo del destinatario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="to" /></p>
+		<textarea th:field="*{mensaje}" id="mensaje" cols="30" rows="10"></textarea><br /><br />
+		<!--<p class="destino">Indica el correo del destinatario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="to" /></p>-->
 		<br/>
 		<input class="btn btn-primary enviar" type="submit" value="Enviar" />
 		<input type="hidden"  name="from" />

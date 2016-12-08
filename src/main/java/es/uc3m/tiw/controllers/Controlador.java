@@ -96,8 +96,16 @@ public class Controlador {
 	}
 	
 	
-	@RequestMapping("/productos")
-	public String productos(){
+	@RequestMapping(value = "/productos", method = RequestMethod.GET)
+	public String productosGet(Model modelo){
+		modelo.addAttribute(new Producto());
+		//Aqui se muestran los productos del cliente de la BD
+		return "misProductos";
+	}
+	
+	@RequestMapping(value = "/productos", method = RequestMethod.POST)
+	public String productosPost(@ModelAttribute Producto producto){
+		restTemplate.postForObject("http://localhost:8020/anadirProducto", producto, Producto.class);
 		return "misProductos";
 	}
 	
@@ -110,16 +118,16 @@ public class Controlador {
 	}
 	
 	@RequestMapping(value = "/chat", method = RequestMethod.GET)
-	public String chatGet(Model modelo, @ModelAttribute Mensaje mensaje){
+	public String chatGet(Model modelo){
 		//Metodo que muestra los mensajes y los emisores de los mismos de un receptor
-		ResponseEntity<Mensaje[]> responseEntity = restTemplate.getForEntity("http://localhost:8030/listarMensajes", Mensaje[].class);
-		Mensaje[] mensajes = responseEntity.getBody();
-		modelo.addAttribute("mensajes", mensajes);
+		//ResponseEntity<Mensaje[]> responseEntity = restTemplate.getForEntity("http://localhost:8030/listarMensajes", Mensaje[].class);
+		//Mensaje[] mensajes = responseEntity.getBody();
+		modelo.addAttribute(new Mensaje());
 		return "chat";
 	}
 	
 	@RequestMapping(value = "/chat", method = RequestMethod.POST)
-	public String chatPost(Model model, @ModelAttribute Mensaje mensaje){
+	public String chatPost(@ModelAttribute Mensaje mensaje){
 		restTemplate.postForObject("http://localhost:8030/guardarMensaje", mensaje, boolean.class);
 		return "chat";
 	}

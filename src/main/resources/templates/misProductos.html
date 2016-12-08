@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="icon" href="images/icono.ico"/>
@@ -93,15 +93,15 @@
 					 
 					<br /><br />
 					
-					<form id="formAlta" action="productos?accion=alta" method="post" >
+					<form id="formAlta" method="post" th:action="@{/productos}" th:object="${producto}">
 						<table id="tabla2"> 
 								<tr id="fila1"><td id="celda1"><b>Añade un nuevo producto</b></td></tr> 
 								<tr id="fila2"> 
 								<td><br />
 									<label>Titulo&nbsp;&nbsp;&nbsp;
-										<input type="text" name="titulo" class="tituloProducto" /><br /><br /></label>
+										<input type="text" th:field="*{titulo}" class="tituloProducto" /><br /><br /></label>
 									<label>Categori­a&nbsp;&nbsp;&nbsp;
-										<select class="categoria" name="categoria">
+										<select class="categoria" th:field="*{categoria}">
 											<option value="Cualquiera" selected="selected">Cualquier categoria</option>
 											<option value="Mobiliario">Mobiliario</option>
 											<option value="Vehiculos">Vehículos</option>
@@ -112,13 +112,13 @@
 										</select>
 									<br /><br /></label>
 									<label>Descripcion&nbsp;&nbsp;&nbsp;
-										<input type="text" name="descripcion" class="descripcion" id="descripcion4" /><br /><br /></label>
-									<label>Imagen&nbsp;&nbsp;&nbsp;
-										<input id="imagen4" name="imagen" type="file" accept="image/*" /><br /><br /></label>
+										<input type="text" th:field="*{descripcion}" class="descripcion" id="descripcion4" /><br /><br /></label>
+									<!--<label>Imagen&nbsp;&nbsp;&nbsp;
+										<input id="imagen4" th:field="*{imagen}"  type="file" accept="image/*" /><br /><br /></label>-->
 									<label>Precio&nbsp;&nbsp;&nbsp;
-										<input type="text" name="precio" class="precio" id="precio4" /><br /><br /></label>
+										<input type="text" th:field="*{precio}" class="precio" id="precio4" /><br /><br /></label>
 									<label>Estado&nbsp;&nbsp;&nbsp;
-										<input type="text" name="estado" class="estado" id="estado4" value="Disponible" readonly="readonly" /><br/><br /></label>
+										<input type="text" name="estado"  class="estado" id="estado4" th:value="Disponible" readonly="readonly" /><br/><br /></label>
 									<label>
 										<button type="submit" class='validar btn btn-info' id='validar'>Añadir</button></label><br />
 								</td>   

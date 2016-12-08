@@ -15,16 +15,14 @@ public class Mensaje implements Serializable{
     private Long id;
     private String mensaje;
    
-    private Cliente from;
+    /*private Cliente from;
    
-    private Cliente to;
+    private Cliente to;*/
     
-    public Mensaje(Long id, String mensaje, Cliente from, Cliente to) {
+    public Mensaje(Long id, String mensaje) {
 		super();
 		this.id = id;
 		this.mensaje = mensaje;
-		this.from = from;
-		this.to = to;
 	}
     
     public Mensaje() {
@@ -42,18 +40,6 @@ public class Mensaje implements Serializable{
 	}
 	public void setMensaje(String mensaje) {
 		this.mensaje = mensaje;
-	}
-	public Cliente getFrom() {
-		return from;
-	}
-	public void setFrom(Cliente from) {
-		this.from = from;
-	}
-	public Cliente getTo() {
-		return to;
-	}
-	public void setTo(Cliente to) {
-		this.to = to;
 	}
 
 }
