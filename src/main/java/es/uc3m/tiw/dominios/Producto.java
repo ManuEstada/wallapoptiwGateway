@@ -1,12 +1,13 @@
 package es.uc3m.tiw.dominios;
 
+
 import java.io.Serializable;
-
-
 
 
 public class Producto implements Serializable{
 	
+
+
 private static final long serialVersionUID = 1L;
 	
 
@@ -47,32 +48,23 @@ private static final long serialVersionUID = 1L;
 	}
 
 	private long id;
-
+	
 	private String titulo;
-
+	
 	private String categoria;
-
+	
 	private String descripcion;
-
+	
 	private String precio;
-
+	
 	private String estado;
-
+	
 	private long clienteID;
-	/*@Lob
-	@Column (name= "imagen")
-	private byte[] imagen;*/
-
-	/*@ManyToOne(optional=false)
-	@JoinColumn(name="clienteID", nullable=false)
-	private clienteDominio duenoProducto;*/
 	
+	private byte[] image;
 	
-	public Producto() {
-		super();
-	}
-
-	public Producto(String titulo, String categoria, String descripcion, String precio, String estado, long clienteID) {
+	public Producto(String titulo, String categoria, String descripcion, String precio, String estado, long clienteID,
+			byte[] image) {
 		super();
 		this.titulo = titulo;
 		this.categoria = categoria;
@@ -80,15 +72,19 @@ private static final long serialVersionUID = 1L;
 		this.precio = precio;
 		this.estado = estado;
 		this.clienteID = clienteID;
-		//this.duenoProducto = duenoProducto;
+		this.image = image;
 	}
-
+	
 	public long getClienteID() {
 		return clienteID;
 	}
 
 	public void setClienteID(long clienteID) {
 		this.clienteID = clienteID;
+	}
+
+	public Producto() {
+		super();
 	}
 
 	public long getId() {
@@ -138,5 +134,14 @@ private static final long serialVersionUID = 1L;
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
 
 }

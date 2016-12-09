@@ -28,17 +28,17 @@
 		<button class="btn btn-warning" onclick="return cerrar();">Cerrar sesión</button>
       </div>
 		<h3>Lista de mensajes</h3>
-	<table class="tablaLista">
+	<table class="table table-striped">
 
 			<tr>
 				<th>De</th>
 				<th>Mensaje</th>
 			</tr>
-			<!-- AQUI SE RECUPERAN LOS MENSAJES DEL USUARIO DE LA BD 
+			<!-- AQUI SE RECUPERAN LOS MENSAJES DEL USUARIO DE LA BD -->
 			<tr th:each="mensaje : ${mensajes}">
-				<td th:text="${mensaje.from}"></td>
+				<td th:text="${mensaje.correoOrigen}"></td>
 				<td th:text="${mensaje.mensaje}"></td>
-			</tr>-->
+			</tr>
 
 	</table>
 	
@@ -46,10 +46,10 @@
 	<fieldset>
 		<legend>CHAT de la aplicación WALLAPOP</legend>
 		<textarea th:field="*{mensaje}" id="mensaje" cols="30" rows="10"></textarea><br /><br />
-		<!--<p class="destino">Indica el correo del destinatario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="to" /></p>-->
+		<p class="destino">Indica el correo de origen:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input th:field="*{correoOrigen}" /></p>
+		<p class="destino">Indica el correo del destinatario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input th:field="*{correoDestino}" /></p>
 		<br/>
 		<input class="btn btn-primary enviar" type="submit" value="Enviar" />
-		<input type="hidden"  name="from" />
 	</fieldset>
 	</form>
 	<p>

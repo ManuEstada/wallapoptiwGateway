@@ -98,7 +98,7 @@
 				<h4 class='tituloFav' th:text="${producto.titulo}"></h4>
 				<p><b>Categoria:</b>&nbsp;&nbsp;&nbsp;<span class="categoria" th:text="${producto.categoria}"></span><br /><br /></p>
 				<p><b>Descripcion:</b>&nbsp;&nbsp;&nbsp;<span class="descripcion" th:text="${producto.descripcion}"></span><br /><br /></p>
-				 <!--<img src="images/cajones.jpg" class="img-circle imagenesProductos" alt="Cajones blancos">-->
+				<img src="data:image/jpg;base64,new String(${imagen})" class="img-circle imagenesProductos" />
 				<p><b>Precio:</b>&nbsp;&nbsp;&nbsp;<span class="precio" th:text="${producto.precio}"></span><br /><br /></p>
 				<p><b>Estado:</b>&nbsp;&nbsp;&nbsp;<span class="estado" th:text="${producto.estado}"></span></p>
 				<p><button class="btn btn-success" onclick="return comprar();">Comprar</button></p>

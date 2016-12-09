@@ -1,7 +1,9 @@
 package es.uc3m.tiw.controllers;
 
 
+
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -153,9 +155,13 @@ public class Controlador {
 	
 	
 	@RequestMapping(value = "/catalogo", method = RequestMethod.GET)
-	public String catalogoGet(Model modelo){
+	public String catalogoGet(Model modelo, @ModelAttribute Producto producto){
+		//Coger imagenes BD
+		//byte[] imagen = Base64.getDecoder().decode(producto.getImage());
+		
 		ResponseEntity<Producto[]> responseEntity = restTemplate.getForEntity("http://localhost:8020/listarProductos", Producto[].class);
 		Producto[] productos = responseEntity.getBody();
+
 		modelo.addAttribute("productos",productos);
 		return "catalogo";
 	}
@@ -190,9 +196,10 @@ public class Controlador {
 	@RequestMapping(value = "/chat", method = RequestMethod.GET)
 	public String chatGet(Model modelo){
 		//Metodo que muestra los mensajes y los emisores de los mismos de un receptor
-		//ResponseEntity<Mensaje[]> responseEntity = restTemplate.getForEntity("http://localhost:8030/listarMensajes", Mensaje[].class);
-		//Mensaje[] mensajes = responseEntity.getBody();
-		modelo.addAttribute(new Mensaje());
+		ResponseEntity<Mensaje[]> responseEntity = restTemplate.getForEntity("http://localhost:8030/listarMensajes", Mensaje[].class);
+		Mensaje[] mensajes = responseEntity.getBody();
+		modelo.addAttribute("mensajes", mensajes);
+		modelo.addAttribute("mensaje", new Mensaje());
 		return "chat";
 	}
 	
