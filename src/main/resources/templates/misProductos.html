@@ -70,7 +70,7 @@
 							 <!--<img src="images/cajones.jpg" class="img-circle imagenesProductos" alt="Cajones blancos">-->
 							<p><b>Precio:</b>&nbsp;&nbsp;&nbsp;<span class="precio" th:text="${producto.precio}"></span><br /><br /></p>
 							<p><b>Estado:</b>&nbsp;&nbsp;&nbsp;<span class="estado" th:text="${producto.estado}"></span></p>
-							<p><a href="editarproducto?id=${producto.id}">Editar</a></p>
+							<p><a th:href="@{'editarproducto?id='+${producto.id}}">Editar</a></p>
 					</div> 
 						
 				
@@ -102,7 +102,8 @@
 					 
 					<br /><br />
 					
-					<form id="formAlta" method="post" action="addProducto" > <!--  th : action="@{/productos}" th : object="${producto}"> -->
+					<form id="formAlta" method="post" action="productos" > <!--  th : action="@{/productos}" th : object="${producto}"> -->
+						
 						<table id="tabla2"> 
 								<tr id="fila1"><td id="celda1"><b>Añade un nuevo producto</b></td></tr> 
 								<tr id="fila2"> 

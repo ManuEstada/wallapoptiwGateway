@@ -113,22 +113,12 @@ public class Controlador {
 	
 	@RequestMapping(value = "/productos", method = RequestMethod.POST)
 	public String productosPost(HttpServletRequest request, Model modelo, @ModelAttribute Producto producto){
-		try {
-			restTemplate.postForObject("http://localhost:8020/anadirProducto", producto, Producto.class);
-			return "misProductos";
-		} catch (Exception ex) {
-			boolean resultado = restTemplate.postForObject("http://localhost:8020/modificar", producto, boolean.class);
-			if(resultado) {
-				//Cliente clienteSesion = (Cliente) request.getSession().getAttribute(USUARIO_SESSION);
-				//Producto[] productos = restTemplate.postForObject("http://localhost:8020/findByClienteID", clienteSesion.getId(), Producto[].class);
-				//modelo.addAttribute("productos", productos);
-				//Aqui se muestran los productos del cliente de la BD
-				return "redirect:productos";
-			} else {
-				modelo.addAttribute(Controlador.ERROR, true);
-				return "miProducto";
-			}
-		}
+		Cliente clienteSesion = (Cliente) request.getSession().getAttribute(USUARIO_SESSION);
+		producto.setClienteID(clienteSesion.getId());
+		restTemplate.postForObject("http://localhost:8020/anadirProducto", producto, Producto.class);
+		Producto[] productos = restTemplate.postForObject("http://localhost:8020/findByClienteID", clienteSesion.getId(), Producto[].class);
+		modelo.addAttribute("productos", productos);
+		return "misProductos";
 	}
 
 	@RequestMapping(value = "/editarproducto", method = RequestMethod.GET)
@@ -249,9 +239,39 @@ public class Controlador {
 		return "redirect:adminusuario";
 	}
 	
-	@RequestMapping("/adminproducto")
-	public String adminproducto(){
+	@RequestMapping(value = "/adminproducto", method = RequestMethod.GET)
+	public String adminproducto(Model modelo){
+		//Producto[] resultado = restTemplate.postForObject("http://localhost:8020/listarProductos", null, Producto[].class);
+
+		ResponseEntity<Producto[]> responseEntity = restTemplate.getForEntity("http://localhost:8020/listarProductos", Producto[].class);
+		Producto[] resultado = responseEntity.getBody();
+
+		modelo.addAttribute("productos", resultado);
 		return "gestionProductos";
 	}
 
+	@RequestMapping(value = "/admineditarproducto", method = RequestMethod.GET)
+	public String admineditarproductoGet(Model modelo, @RequestParam("id") long id){
+		Producto resultado = restTemplate.postForObject("http://localhost:8020/findByID", id, Producto.class);
+		modelo.addAttribute("producto_edicion", resultado);
+		return "editarProducto";
+	}
+
+	@RequestMapping(value = "/admineditarproducto", method = RequestMethod.POST)
+	public String admineditarproductoPost(Model modelo, @ModelAttribute Producto producto){
+		boolean resultado = restTemplate.postForObject("http://localhost:8020/modificar", producto, boolean.class);
+		if(resultado) {
+			return "redirect:adminproducto";
+		} else {
+			modelo.addAttribute(Controlador.ERROR, true);
+			return "editarProducto";
+		}
+	}
+
+	@RequestMapping(value = "/admineliminarproducto", method = RequestMethod.GET)
+	public String admineliminarproducto(Model modelo, @RequestParam("id") long id){
+		restTemplate.postForObject("http://localhost:8020/eliminar", id, boolean.class);
+		return "redirect:adminproducto";
+	}
+	
 }

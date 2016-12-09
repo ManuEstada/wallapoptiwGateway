@@ -2,6 +2,8 @@ package es.uc3m.tiw.dominios;
 
 
 import java.io.Serializable;
+import java.util.Base64;
+
 
 
 public class Producto implements Serializable{
@@ -46,21 +48,14 @@ private static final long serialVersionUID = 1L;
 		   throw new IllegalArgumentException("Categoría no encontrada.");
 		}
 	}
-
+	
 	private long id;
-	
 	private String titulo;
-	
 	private String categoria;
-	
 	private String descripcion;
-	
 	private String precio;
-	
 	private String estado;
-	
 	private long clienteID;
-	
 	private byte[] image;
 	
 	public Producto(String titulo, String categoria, String descripcion, String precio, String estado, long clienteID,
@@ -141,6 +136,16 @@ private static final long serialVersionUID = 1L;
 
 	public void setImage(byte[] image) {
 		this.image = image;
+	}
+
+
+	public String generateBase64Image()
+	{
+		if(this.getImage() == null || this.getImage().length < 1) {
+			return "";
+		} else {
+		    return Base64.getEncoder().encodeToString(this.getImage());
+		}
 	}
 
 

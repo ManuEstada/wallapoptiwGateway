@@ -47,8 +47,8 @@
 			<td th:text="${usuario.apellidos}"></td>
 			<td th:text="${usuario.correo}"></td>
 			<td th:text="${usuario.provincia}"></td>
-			<td><a href="admineditarusuario?id=${usuario.id}" title="Editar usuario ${usuario.nombre}" >Editar</a></td>
-			<td><a href="admineliminarusuario?id=${usuario.id}" title="Eliminar usuario ${usuario.nombre}" >Eliminar</a></td>
+			<td><a  th:href="@{'admineditarusuario?id='+${usuario.id}}"  th:title="@{'Editar producto '+${usuario.nombre}}" >Editar</a></td>
+			<td><a th:href="@{'admineliminarusuario?id='+${usuario.id}}" tth:title="@{'Eliminar producto '+${usuario.nombre}}"  >Eliminar</a></td>
 		</tr>
 	  </tbody>
 	  </table>

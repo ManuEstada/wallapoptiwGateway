@@ -40,7 +40,15 @@
 	  	<tr class="fila1"><td>Titulo</td><td>Categoria</td><td>Descripcion</td><td>Precio</td><td>Estado</td><td></td><td></td></tr>
 	  </thead>
 	  <tbody>
-	  <!-- AQUI VAN TODOS LOS PRODUCTOS DE LA BASE DE DATOS -->
+		<tr th:each="producto : ${productos}"> 
+			<td th:text="${producto.titulo}"></td>
+			<td th:text="${producto.categoria}"></td>
+			<td th:text="${producto.descripcion}"></td>
+			<td th:text="${producto.precio}"></td>
+			<td th:text="${producto.estado}"></td>
+			<td><a  th:href="@{'admineditarproducto?id='+${producto.id}}"  th:title="@{'Editar producto '+${producto.titulo}}" >Editar</a></td>
+			<td><a th:href="@{'admineliminarproducto?id='+${producto.id}}" tth:title="@{'Eliminar producto '+${producto.titulo}}"  >Eliminar</a></td>
+		</tr>
 	  </tbody>
 	  </table>
 	  <p>
