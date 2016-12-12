@@ -38,7 +38,7 @@
 	
 #tabla{
 	background: #EFFBFB;
-	width:500px;
+	width:800px;
 	height:auto;
 	margin-left: 280px;
 	margin-top: 40px;
@@ -117,8 +117,9 @@
 }
 
 .fav{ /*Div de los productos*/
-	margin-left: 35px;
-	margin-right: 35px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 20px;
 	font-size: 16px;
 	font-family: 'Ubuntu', sans-serif;
 	padding:6px;
@@ -187,7 +188,7 @@ input{
 	float: right;
 	width:150px;
 	height:150px;
-	margin-top: -175px;
+	margin-top: -160px;
 }
 
 .borrar{

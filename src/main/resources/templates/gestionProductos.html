@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="icon" href="images/icono.ico"/>
@@ -13,7 +13,7 @@
     
     function cerrar(){
     	alert("Acaba de cerrar sesión. Se le redirigirá a la pantalla inicial de la aplicación.");
-    	window.location = "login.html";
+    	window.location = "login";
     }
     
     </script>
@@ -37,7 +37,7 @@
 		</nav>
 	  	  <table id="tablaGestion" class="table" >
 	  <thead>
-	  	<tr class="fila1"><td>Titulo</td><td>Categoria</td><td>Descripcion</td><td>Precio</td><td>Estado</td><td></td><td></td></tr>
+	  	<tr class="fila1"><td>Titulo</td><td>Categoria</td><td>Descripcion</td><td>Precio</td><td>Estado</td><td>Imagen</td><td></td><td></td></tr>
 	  </thead>
 	  <tbody>
 		<tr th:each="producto : ${productos}"> 
@@ -46,8 +46,9 @@
 			<td th:text="${producto.descripcion}"></td>
 			<td th:text="${producto.precio}"></td>
 			<td th:text="${producto.estado}"></td>
+			<td th:text="${producto.image}"></td>
 			<td><a  th:href="@{'admineditarproducto?id='+${producto.id}}"  th:title="@{'Editar producto '+${producto.titulo}}" >Editar</a></td>
-			<td><a th:href="@{'admineliminarproducto?id='+${producto.id}}" tth:title="@{'Eliminar producto '+${producto.titulo}}"  >Eliminar</a></td>
+			<td><a th:href="@{'admineliminarproducto?id='+${producto.id}}" th:title="@{'Eliminar producto '+${producto.titulo}}"  >Eliminar</a></td>
 		</tr>
 	  </tbody>
 	  </table>

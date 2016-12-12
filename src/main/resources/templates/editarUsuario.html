@@ -3,17 +3,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="icon" href="images/icono.ico"/>
-    <title>WALLAPOP: Mi perfil</title>
+    <title>WALLAPOP: Editar usuario</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom styles for this template -->
     <link href="css/login.css" rel="stylesheet"/>
-    <link href="css/perfilCliente.css" rel="stylesheet"/>
+   <link href="css/editar.css" rel="stylesheet" />
     
     <script type="text/javascript">
     function cerrar(){
     	alert("Acaba de cerrar sesión. Se le redirigirá a la pantalla inicial de la aplicación.");
-    	window.location = "login.html";
+    	window.location = "login";
     }
 
     function eliminar(){
@@ -59,7 +59,7 @@
 			<p class='etiquetas'><b>E-mail:&nbsp;&nbsp;&nbsp;</b>
 				<input type="text" class="email" tabindex="4" id='correo' readonly="readonly" th:value="${usuario_edicion.correo}" /><br /><br /></p>
 			
-			<button type="submit" value="Guardar"></button>
+			<button class="elim btn btn-warning" type="submit">Guardar</button>
 		</form>
 	<p>
 		<a class ="btn btn-info" href="javascript:history.go(-1)">Volver</a>

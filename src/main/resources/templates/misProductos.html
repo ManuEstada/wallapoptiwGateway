@@ -11,9 +11,11 @@
     <link href="css/perfilCliente.css" rel="stylesheet"/>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
      <script type="text/javascript">
+     
+ 
      function cerrar(){
      	alert("Acaba de cerrar sesión. Se le redirigirá a la pantalla inicial de la aplicación.");
-     	window.location = "login.html";
+     	window.location = "login";
      }
 
      function tabla() {
@@ -23,7 +25,11 @@
     	    } else {
     	        x.style.display = 'none';
     	    }
-    	}
+     }
+     
+     function eliminar(){
+    	 confirm("¿Está seguro de que quiere borrar este producto?");
+     }
      
      </script>
 </head>
@@ -67,39 +73,13 @@
 							<h4 class='tituloFav' th:text="${producto.titulo}"></h4>
 							<p><b>Categoria:</b>&nbsp;&nbsp;&nbsp;<span class="categoria" th:text="${producto.categoria}"></span><br /><br /></p>
 							<p><b>Descripcion:</b>&nbsp;&nbsp;&nbsp;<span class="descripcion" th:text="${producto.descripcion}"></span><br /><br /></p>
-							 <!--<img src="images/cajones.jpg" class="img-circle imagenesProductos" alt="Cajones blancos">-->
+							<img th:src="@{'data:image/jpeg;base64,'+${producto.generateBase64Image()}}"  class="img-circle imagenesProductos" />
 							<p><b>Precio:</b>&nbsp;&nbsp;&nbsp;<span class="precio" th:text="${producto.precio}"></span><br /><br /></p>
 							<p><b>Estado:</b>&nbsp;&nbsp;&nbsp;<span class="estado" th:text="${producto.estado}"></span></p>
-							<p><a th:href="@{'editarproducto?id='+${producto.id}}">Editar</a></p>
-					</div> 
-						
-				
-					 <!-- AQUI SE METERIAN LOS PRODUCTOS DE LA BASE DE DATOS ASOCIADOS AL CLIENTE -->
-					
-					<!--	<button class='elim btn btn-warning' id='edit' onclick='editarProd()'>Editar</button>
-						<div class="fav" id="fav"> 
-							<form action="productos" method="post">
-								<input type="hidden" name="accion" value="editar" />
-								<input type="hidden" name="titulo" value="<%= product.getTitulo() %>" />
-								<input type="hidden" name="id" value="<%= product.getId() %>" />
-								<button type="submit" class="cont btn btn-success" id="confirm" >Confirmar</button>
-									<h4 class='tituloFav'><%= product.getTitulo() %></h4>
-									<p>Categoria:&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria" name="categoria" readonly value="<%= product.getCategoria() %>"><br><br></p>
-									<p>Descripcion:&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion" name="descripcion" readonly value="<%= product.getDescripcion() %>"><br><br></p>
-								
-									<img src="" class="img-circle imagenesProductos" alt="Cajones blancos">
-								
-									<p>Precio:&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio" name="precio" readonly value="<%= product.getPrecio() %>"><br><br></p>
-									<p>Estado:&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado" name="estado" readonly value="<%= product.getEstado() %>"><br><br></p>
-								
-							</form>
-							<a href="productos?accion=borrar&id=<%= product.getId() %>" >
-								<button class='btn btn-danger eliminarProducto' onclick="eliminarProd()">Dar de baja el producto</button>
-							</a>
-						</div> 
-					
-					-->
-					 
+							<p><a class='btn btn-warning' th:href="@{'editarproducto?id='+${producto.id}}">Editar</a></p>
+							<p><a class='btn btn-danger' onclick="return eliminar();"   th:href="@{'productosN?id='+${producto.id}}" > 
+							Borrar producto</a></p>
+					</div>  
 					<br /><br />
 					
 					<form id="formAlta" method="post" action="productos" > <!--  th : action="@{/productos}" th : object="${producto}"> -->
@@ -123,8 +103,8 @@
 									<br /><br /></label>
 									<label>Descripcion&nbsp;&nbsp;&nbsp;
 										<input type="text" name="descripcion" class="descripcion" id="descripcion4" /><br /><br /></label><!-- th:field="*{descripcion}"  -->
-									<!--<label>Imagen&nbsp;&nbsp;&nbsp;
-										<input id="imagen4" th:field="*{imagen}"  type="file" accept="image/*" /><br /><br /></label>-->
+									<label>Imagen&nbsp;&nbsp;&nbsp;
+										<input id="imagen4" name="imagen" type="file" accept="image/*" /><br /><br /></label>
 									<label>Precio&nbsp;&nbsp;&nbsp;
 										<input type="text" name="precio" class="precio" id="precio4" /><br /><br /></label><!--  th:field="*{precio}" -->
 									<label>Estado&nbsp;&nbsp;&nbsp;

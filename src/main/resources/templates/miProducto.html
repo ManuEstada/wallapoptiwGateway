@@ -3,17 +3,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="icon" href="images/icono.ico"/>
-    <title>WALLAPOP: Mi perfil</title>
+    <title>WALLAPOP: Editar producto</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom styles for this template -->
     <link href="css/login.css" rel="stylesheet"/>
-    <link href="css/perfilCliente.css" rel="stylesheet"/>
+    <link href="css/editar.css" rel="stylesheet"/>
     
     <script type="text/javascript">
     function cerrar(){
     	alert("Acaba de cerrar sesión. Se le redirigirá a la pantalla inicial de la aplicación.");
-    	window.location = "login.html";
+    	window.location = "login";
     }
 
 	
@@ -46,11 +46,11 @@
 			<input type="hidden" name="id" th:value="${producto.id}" />  
 			<input type="hidden" name="clienteID" th:value="${producto.clienteID}" />  
 			
-			<label>Titulo&nbsp;&nbsp;&nbsp;
-				<input type="text" name="titulo"  class="tituloProducto"  th:value="${producto.titulo}"  /><br /><br /></label><!-- th:field="*{titulo}"  -->
-			<label>Categori­a&nbsp;&nbsp;&nbsp;
-				<select class="categoria" name="categoria" >
-					<option value="" selected="selected">Cualquier categoria</option>
+			<p class='etiquetas'><b>Titulo&nbsp;&nbsp;&nbsp;</b>
+				<input type="text" name="titulo"  class="tituloProducto"  th:value="${producto.titulo}"  /><br /><br /></p><!-- th:field="*{titulo}"  -->
+			<p class='etiquetas'><b>Categori­a&nbsp;&nbsp;&nbsp;</b>
+				<select  class="categoria" name="categoria" >
+					<option th:value="${producto.categoria}" selected="selected"></option>
 					<option value="Mobiliario">Mobiliario</option>
 					<option value="Vehiculos">Vehículos</option>
 					<option value="Moda y belleza">Moda y belleza</option>
@@ -58,17 +58,17 @@
 					<option value="Ocio">Ocio y deportes</option>
 					<option value="Otros">Otros</option>
 				</select><!-- th:field="*{categoria}" -->
-			<br /><br /></label>
-			<label>Descripcion&nbsp;&nbsp;&nbsp;
-				<input type="text" name="descripcion" class="descripcion" id="descripcion4"  th:value="${producto.descripcion}" /><br /><br /></label><!-- th:field="*{descripcion}"  -->
-			<!--<label>Imagen&nbsp;&nbsp;&nbsp;
-				<input id="imagen4" th:field="*{imagen}"  type="file" accept="image/*" /><br /><br /></label>-->
-			<label>Precio&nbsp;&nbsp;&nbsp;
-				<input type="text" name="precio" class="precio" id="precio4"  th:value="${producto.precio}" /><br /><br /></label><!--  th:field="*{precio}" -->
-			<label>Estado&nbsp;&nbsp;&nbsp;
-				<input type="text" name="estado"  class="estado" id="estado4" readonly="readonly"  th:value="${producto.estado}"  /><br/><br /></label><!--   -->
+			<br /><br /></p>
+			<p class='etiquetas'><b>Descripcion&nbsp;&nbsp;&nbsp;</b>
+				<input type="text" name="descripcion" class="descripcion" id="descripcion4"  th:value="${producto.descripcion}" /><br /><br /></p><!-- th:field="*{descripcion}"  -->
+			<p class='etiquetas'><b>Imagen&nbsp;&nbsp;&nbsp;</b>
+				<input id="imagen4" name="imagen" th:value="${producto.image}"  type="file" accept="image/*" /><br /><br /></p>
+			<p class='etiquetas'><b>Precio&nbsp;&nbsp;&nbsp;</b>
+				<input type="text" name="precio" class="precio" id="precio4"  th:value="${producto.precio}" /><br /><br /></p><!--  th:field="*{precio}" -->
+			<p class='etiquetas'><b>Estado&nbsp;&nbsp;&nbsp;</b>
+				<input type="text" name="estado"  class="estado" id="estado4" readonly="readonly"  th:value="${producto.estado}"  /><br/><br /></p>
 			<label>
-				<button type="submit" class='validar btn btn-info' id='validar'>Guardar</button></label><br />
+				<button type="submit" class='validar btn btn-warning' id='validar'>Guardar</button></label><br />
 		</form>
 	<p>
 		<a class ="btn btn-info" href="javascript:history.go(-1)">Volver</a>

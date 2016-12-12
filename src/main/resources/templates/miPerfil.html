@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="icon" href="images/icono.ico"/>
@@ -13,12 +13,12 @@
     <script type="text/javascript">
     function cerrar(){
     	alert("Acaba de cerrar sesión. Se le redirigirá a la pantalla inicial de la aplicación.");
-    	window.location = "login.html";
+    	window.location = "login";
     }
 
     function eliminar(){
-	confirm("¿Esta seguro que quiere darse de baja en la aplicación? Al hacerlo se le eliminaran automáticamente los productos que tiene puestos en su perfil.");
-	}
+		confirm("¿Esta seguro que quiere darse de baja en la aplicación? Al hacerlo se le eliminaran automáticamente los productos que tiene puestos en su perfil.");
+    }
 	
 	</script>
 	
@@ -57,14 +57,12 @@
 					<form action="perfil" method="post">
 					<h1 class="titulo">INFORMACIÓN PERSONAL</h1>
 					
-					<a class="elim btn btn-warning" id="edit1">Editar</a>
-					
 					<h3 class='subtitulo'>Datos personales</h3>
 						
 					<div id='datospersonales'>
-						<p class='etiquetas'><b>Nombre:&nbsp;&nbsp;&nbsp;</b><input class="nombrecompleto" type="text" name="nombre" tabindex="1" id='name'  value="" /><br /><br /></p>
-						<p class='etiquetas'><b>Apellidos:&nbsp;&nbsp;&nbsp;</b><input class="apellidos" type="text" name="apellidos" tabindex="2" id='apellido' value="" /><br /><br /></p>
-						<p class='etiquetas'><b>Provincia:&nbsp;</b><input type="text" name="provincia" id="ciudad" tabindex="3"  value=""/><br/></p>
+						<p class='etiquetas'><b>Nombre:&nbsp;&nbsp;&nbsp;</b><input class="nombrecompleto" type="text" name="nombre" tabindex="1" id='name'  th:value="${cliente.nombre}" /><br /><br /></p>
+						<p class='etiquetas'><b>Apellidos:&nbsp;&nbsp;&nbsp;</b><input class="apellidos" type="text" name="apellidos" tabindex="2" id='apellido' th:value="${cliente.apellidos}" /><br /><br /></p>
+						<p class='etiquetas'><b>Provincia:&nbsp;</b><input type="text" name="provincia" id="ciudad" tabindex="3"  th:value="${cliente.provincia}"/><br/></p>
 					</div>
 					
 					<div class='separacion'>
@@ -74,14 +72,14 @@
 					<h3 class='subtitulo'>Datos de usuario</h3>
 						
 					<div id='datosusuario'>
-						<input type="hidden" name="id" value="3" />
-						<input type="hidden" name="correo" value="carolina@hotmail.com" />
-						<p class='etiquetas'><b>E-mail:&nbsp;&nbsp;&nbsp;</b><input type="text" class="email" tabindex="4" id='correo' readonly="readonly" value="" /><br /><br /></p>
-						<p class='etiquetas' ><b>Contraseña:&nbsp;</b><input class="contrasena" name="contrasena" type="text" tabindex="5" id ='pass' readonly="readonly" value="" /><br /><br /></p>
+						
+						<input type="hidden" name="id" th:value="${cliente.id}" />
+						<p class='etiquetas'><b>E-mail:&nbsp;&nbsp;&nbsp;</b><input type="text" class="email" tabindex="4" id='correo' readonly="readonly" name="correo" th:value="${cliente.correo}" /><br /><br /></p>
+						<p class='etiquetas' ><b>Contraseña:&nbsp;</b><input class="contrasena" type="text" tabindex="5" id ='pass' readonly="readonly" name="contrasena" th:value="${cliente.contrasena}" /><br /><br /></p>
 					</div>
-					<button type="submit" value="Guardar"></button>
+					<button class="elim btn btn-warning" type="submit" >Guardar</button>
 					</form>
-					<a class='btn btn-danger borrar' onclick="return eliminar();" href=""  > 
+					<a class='btn btn-danger borrar' onclick="return eliminar();"  href="/loginNuevo" > 
 					Darse de baja en la aplicación</a>
 					
 					

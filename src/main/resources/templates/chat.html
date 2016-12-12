@@ -13,9 +13,39 @@
     
     function cerrar(){
     	alert("Acaba de cerrar sesión. Se le redirigirá a la pantalla inicial de la aplicación.");
-    	window.location = "login.html";
+    	window.location = "login";
     }
     
+    function validacion(){
+    	
+    	var msg = document.getElementById("mensaje").value;
+    	var correoOrigen = document.getElementById("origen").value;
+    	var correoDestino = document.getElementById("destino").value;
+    	
+    	var expresion = /^[a-z][\w.-]+@\w[\w.-]+\.[\w.-]*[a-z][a-z]$/i;
+    	
+    	if(msg.length == 0){
+		alert("Por favor rellene el campo mensaje. No puede enviar un mensaje vacio.");
+		return false;
+		}
+    	if (correoOrigen.length == 0){
+    		alert("Por favor introduce tu dirección de correo electrónico.");
+    		return false;
+    	}
+    	if (!expresion.test(correoOrigen)){
+    		alert("Por favor introduce una dirección de correo electrónico válida.");
+    		return false;
+    	}
+    	if (correoDestino.length == 0){
+    		alert("Por favor introduce la dirección de correo electrónico del destinatario.");
+    		return false;
+    	}
+    	if (!expresion.test(correoDestino)){
+    		alert("Por favor introduce una dirección de correo electrónico válida");
+    		return false;
+    	}
+    	
+    }
     </script>
 </head>
 <body>
@@ -46,10 +76,10 @@
 	<fieldset>
 		<legend>CHAT de la aplicación WALLAPOP</legend>
 		<textarea th:field="*{mensaje}" id="mensaje" cols="30" rows="10"></textarea><br /><br />
-		<p class="destino">Indica el correo de origen:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input th:field="*{correoOrigen}" /></p>
-		<p class="destino">Indica el correo del destinatario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input th:field="*{correoDestino}" /></p>
+		<p class="destino">Indica el correo de origen:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="origen" th:field="*{correoOrigen}" /></p>
+		<p class="destino">Indica el correo del destinatario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="destino" th:field="*{correoDestino}" /></p>
 		<br/>
-		<input class="btn btn-primary enviar" type="submit" value="Enviar" />
+		<input class="btn btn-primary enviar" onclick="return validacion();" type="submit" value="Enviar" />
 	</fieldset>
 	</form>
 	<p>

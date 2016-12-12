@@ -13,7 +13,11 @@
     
     function cerrar(){
     	alert("Acaba de cerrar sesión. Se le redirigirá a la pantalla inicial de la aplicación.");
-    	window.location = "login.html";
+    	window.location = "login";
+    }
+    
+    function eliminar(){
+		confirm("¿Esta seguro que quiere darse de baja en la aplicación? Al hacerlo se le eliminaran automáticamente los productos que tiene puestos en su perfil.");
     }
     
     </script>
@@ -42,13 +46,13 @@
 	  	
 	  </thead>
 	  <tbody>
-		<tr class='fila1' th:each="usuario : ${usuarios}"> 
+		<tr th:each="usuario : ${usuarios}"> 
 			<td th:text="${usuario.nombre}"></td>
 			<td th:text="${usuario.apellidos}"></td>
 			<td th:text="${usuario.correo}"></td>
 			<td th:text="${usuario.provincia}"></td>
 			<td><a  th:href="@{'admineditarusuario?id='+${usuario.id}}"  th:title="@{'Editar producto '+${usuario.nombre}}" >Editar</a></td>
-			<td><a th:href="@{'admineliminarusuario?id='+${usuario.id}}" tth:title="@{'Eliminar producto '+${usuario.nombre}}"  >Eliminar</a></td>
+			<td><a onclick="return eliminar();" th:href="@{'admineliminarusuario?id='+${usuario.id}}" th:title="@{'Eliminar producto '+${usuario.nombre}}"  >Eliminar</a></td>
 		</tr>
 	  </tbody>
 	  </table>

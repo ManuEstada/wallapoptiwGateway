@@ -37,6 +37,19 @@ public class Controlador {
 	public String loginGet(){
 		return "login";
 	}
+	
+	@RequestMapping(value = "/loginNuevo", method = RequestMethod.GET)
+	public String BorrarUsuario(HttpServletRequest request){
+		Cliente clienteSesion = (Cliente) request.getSession().getAttribute(USUARIO_SESSION);
+		Long id = clienteSesion.getId();
+		restTemplate.postForObject("http://localhost:8010/delete", clienteSesion , boolean.class);
+		Producto[] productos = restTemplate.postForObject("http://localhost:8020/findByClienteID", id, Producto[].class);
+		for (int i = 0; i<productos.length; i++){
+			Long idProducto = productos[i].getId();
+			restTemplate.postForObject("http://localhost:8020/eliminar", idProducto , boolean.class);
+		}
+		return "redirect:/login";	
+	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginPost(HttpServletRequest request,
@@ -90,24 +103,29 @@ public class Controlador {
 	
 	
 	@RequestMapping(value = "/perfil", method = RequestMethod.GET)
-	public String perfilGet(){
+	public String perfilGet(HttpServletRequest request, Model modelo){
+		Cliente clienteSesion = (Cliente) request.getSession().getAttribute(USUARIO_SESSION);
+		Cliente clientePerfil = restTemplate.postForObject("http://localhost:8010/findByID", clienteSesion.getId(), Cliente.class);
+		modelo.addAttribute("cliente", clientePerfil);
 		return "miPerfil";
 	}
 
 	@RequestMapping(value = "/perfil", method = RequestMethod.POST)
-	public String perfilPost(Model model, @ModelAttribute Cliente cliente){
-		restTemplate.postForObject("http://localhost:8010/modify", cliente, boolean.class);
-		model.addAttribute(Controlador.USUARIO_SESSION, cliente);
-		return "miPerfil";
+	public String perfilPost(HttpServletRequest request, Model modelo, @ModelAttribute Cliente cliente){
+		boolean resultado = restTemplate.postForObject("http://localhost:8010/modify", cliente, boolean.class);
+		if(resultado) {
+			return "miPerfil";
+		}else{
+			modelo.addAttribute(Controlador.ERROR, true);
+			return "miPerfil";
+		}
 	}
-	
 	
 	@RequestMapping(value = "/productos", method = RequestMethod.GET)
 	public String productosGet(HttpServletRequest request, Model modelo){
 		Cliente clienteSesion = (Cliente) request.getSession().getAttribute(USUARIO_SESSION);
 		Producto[] productos = restTemplate.postForObject("http://localhost:8020/findByClienteID", clienteSesion.getId(), Producto[].class);
 		modelo.addAttribute("productos", productos);
-		//Aqui se muestran los productos del cliente de la BD
 		return "misProductos";
 	}
 	
@@ -119,6 +137,12 @@ public class Controlador {
 		Producto[] productos = restTemplate.postForObject("http://localhost:8020/findByClienteID", clienteSesion.getId(), Producto[].class);
 		modelo.addAttribute("productos", productos);
 		return "misProductos";
+	}
+	
+	@RequestMapping(value = "/productosN", method = RequestMethod.GET)
+	public String borrarProducto(@RequestParam(name="id") long id){
+		restTemplate.postForObject("http://localhost:8020/eliminar", id , boolean.class);
+		return "redirect:/productos";
 	}
 
 	@RequestMapping(value = "/editarproducto", method = RequestMethod.GET)
@@ -184,7 +208,7 @@ public class Controlador {
 	}
 	
 	@RequestMapping(value = "/chat", method = RequestMethod.GET)
-	public String chatGet(Model modelo){
+	public String chatGet(HttpServletRequest request, Model modelo){
 		//Metodo que muestra los mensajes y los emisores de los mismos de un receptor
 		ResponseEntity<Mensaje[]> responseEntity = restTemplate.getForEntity("http://localhost:8030/listarMensajes", Mensaje[].class);
 		Mensaje[] mensajes = responseEntity.getBody();
@@ -195,8 +219,9 @@ public class Controlador {
 	
 	@RequestMapping(value = "/chat", method = RequestMethod.POST)
 	public String chatPost(@ModelAttribute Mensaje mensaje){
-		restTemplate.postForObject("http://localhost:8030/guardarMensaje", mensaje, boolean.class);
-		return "chat";
+		restTemplate.postForObject("http://localhost:8030/guardarMensaje", mensaje, void.class);
+		return "redirect:/chat";
+		
 	}
 	
 	@RequestMapping("/inicioAdmin")
@@ -232,12 +257,19 @@ public class Controlador {
 	}
 
 	@RequestMapping(value = "/admineliminarusuario", method = RequestMethod.GET)
-	public String admineliminarusuario(Model modelo, @RequestParam("id") long id){
-		restTemplate.postForObject("http://localhost:8010/delete", id, boolean.class);
+	public String admineliminarusuario(Model modelo, @RequestParam("id") Long id){
+		Cliente cliente = restTemplate.postForObject("http://localhost:8010/findByID", id, Cliente.class);
+		restTemplate.postForObject("http://localhost:8010/delete", cliente, boolean.class);
+		Producto[] productos = restTemplate.postForObject("http://localhost:8020/findByClienteID", id, Producto[].class);
+		for (int i = 0; i<productos.length; i++){
+			Long idProducto = productos[i].getId();
+			restTemplate.postForObject("http://localhost:8020/eliminar", idProducto , boolean.class);
+		}
 		Cliente[] lista = restTemplate.postForObject("http://localhost:8010/getAll", null, Cliente[].class);
 		modelo.addAttribute("usuarios", lista);
 		return "redirect:adminusuario";
 	}
+	
 	
 	@RequestMapping(value = "/adminproducto", method = RequestMethod.GET)
 	public String adminproducto(Model modelo){
