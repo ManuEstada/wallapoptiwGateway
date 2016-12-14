@@ -212,16 +212,35 @@ public class Controlador {
 		//Metodo que muestra los mensajes y los emisores de los mismos de un receptor
 		ResponseEntity<Mensaje[]> responseEntity = restTemplate.getForEntity("http://localhost:8030/listarMensajes", Mensaje[].class);
 		Mensaje[] mensajes = responseEntity.getBody();
+		Cliente clienteSesion = (Cliente) request.getSession().getAttribute(USUARIO_SESSION);
+		String correoDestino = clienteSesion.getCorreo();
+		
+		for(int i = 0; i < mensajes.length; i++){
+			String correo1 = mensajes[i].getCorreoDestino();
+			if(correoDestino.equalsIgnoreCase(correo1)){
+				mensajes[i] = mensajes[i];
+			}else{
+				mensajes[i].setMensaje("");
+				mensajes[i].setCorreoOrigen("");
+			}
+		}
+		modelo.addAttribute("correoOrigen", correoDestino);
 		modelo.addAttribute("mensajes", mensajes);
 		modelo.addAttribute("mensaje", new Mensaje());
 		return "chat";
 	}
 	
 	@RequestMapping(value = "/chat", method = RequestMethod.POST)
-	public String chatPost(@ModelAttribute Mensaje mensaje){
-		restTemplate.postForObject("http://localhost:8030/guardarMensaje", mensaje, void.class);
-		return "redirect:/chat";
-		
+	public String chatPost(Model modelo, @ModelAttribute Mensaje mensaje){
+		String correoDestino = mensaje.getCorreoDestino();
+		Cliente cliente = restTemplate.postForObject("http://localhost:8010/findByCorreo", correoDestino, Cliente.class);
+		if (cliente != null){
+			restTemplate.postForObject("http://localhost:8030/guardarMensaje", mensaje, void.class);
+			return "redirect:/chat";
+		}else{
+			modelo.addAttribute("error", "El correo de destino no existe");
+			return "chat";
+		}
 	}
 	
 	@RequestMapping("/inicioAdmin")

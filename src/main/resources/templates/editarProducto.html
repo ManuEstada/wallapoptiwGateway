@@ -48,7 +48,8 @@
 				<input type="text" name="titulo"  class="tituloProducto"  th:value="${producto_edicion.titulo}"  /><br /><br /></p><!-- th:field="*{titulo}"  -->
 			<p class='etiquetas'><b>Categori­a&nbsp;&nbsp;&nbsp;</b>
 				<select  class="categoria" name="categoria" >
-					<option th:value="${producto_edicion.categoria}" selected="selected"></option>
+					<option th:selected="${producto_edicion.categoria}" th:text="${producto_edicion.categoria}"></option>
+					<option value="Cualquier categoria" > Cualquier categoria </option>
 					<option value="Mobiliario">Mobiliario</option>
 					<option value="Vehiculos">Vehículos</option>
 					<option value="Moda y belleza">Moda y belleza</option>

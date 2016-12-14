@@ -1,7 +1,7 @@
 @import
 	url("http://fonts.googleapis.com/css?family=Philosopher")
 	;
-
+	
 legend{
 	text-align: center;
 	font-family: 'Philosopher', sans-serif;
@@ -34,4 +34,12 @@ input, textarea{
 
 form{
 	margin-top: 50px;
+}
+
+.error{
+	font-family: 'Philosopher', sans-serif;
+	margin-left: 250px;
+	color: red; 
+	font-weight: bold;	
+	font-size: 18px;
 }

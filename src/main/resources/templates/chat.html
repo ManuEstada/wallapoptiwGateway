@@ -19,7 +19,6 @@
     function validacion(){
     	
     	var msg = document.getElementById("mensaje").value;
-    	var correoOrigen = document.getElementById("origen").value;
     	var correoDestino = document.getElementById("destino").value;
     	
     	var expresion = /^[a-z][\w.-]+@\w[\w.-]+\.[\w.-]*[a-z][a-z]$/i;
@@ -28,14 +27,6 @@
 		alert("Por favor rellene el campo mensaje. No puede enviar un mensaje vacio.");
 		return false;
 		}
-    	if (correoOrigen.length == 0){
-    		alert("Por favor introduce tu dirección de correo electrónico.");
-    		return false;
-    	}
-    	if (!expresion.test(correoOrigen)){
-    		alert("Por favor introduce una dirección de correo electrónico válida.");
-    		return false;
-    	}
     	if (correoDestino.length == 0){
     		alert("Por favor introduce la dirección de correo electrónico del destinatario.");
     		return false;
@@ -65,8 +56,8 @@
 				<th>Mensaje</th>
 			</tr>
 			<!-- AQUI SE RECUPERAN LOS MENSAJES DEL USUARIO DE LA BD -->
-			<tr th:each="mensaje : ${mensajes}">
-				<td th:text="${mensaje.correoOrigen}"></td>
+			<tr th:each="mensaje : ${mensajes}" >
+				<td th:text="${mensaje.correoOrigen}" ></td>
 				<td th:text="${mensaje.mensaje}"></td>
 			</tr>
 
@@ -76,8 +67,9 @@
 	<fieldset>
 		<legend>CHAT de la aplicación WALLAPOP</legend>
 		<textarea th:field="*{mensaje}" id="mensaje" cols="30" rows="10"></textarea><br /><br />
-		<p class="destino">Indica el correo de origen:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="origen" th:field="*{correoOrigen}" /></p>
+		<input type="hidden" id="origen" name="correoOrigen" th:value="${correoOrigen}" />
 		<p class="destino">Indica el correo del destinatario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="destino" th:field="*{correoDestino}" /></p>
+		<p class="error" th:text="${error != null} ? ${error}"></p>
 		<br/>
 		<input class="btn btn-primary enviar" onclick="return validacion();" type="submit" value="Enviar" />
 	</fieldset>
