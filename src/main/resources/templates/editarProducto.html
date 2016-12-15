@@ -15,7 +15,15 @@
     	alert("Acaba de cerrar sesión. Se le redirigirá a la pantalla inicial de la aplicación.");
     	window.location = "login";
     }
-
+    
+    function ValidateNumeric() {
+    	var val = document.getElementById("precio4").value;
+    	if (!(/^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/.test(val))) {
+    		alert("Por favor escriba un número valido.");
+    		return false;
+    	}
+    	return true;
+   	}
 	</script>
 	
 </head>
@@ -67,7 +75,7 @@
 			<p class='etiquetas'><b>Estado&nbsp;&nbsp;&nbsp;</b>
 				<input type="text" name="estado"  class="estado" id="estado4" readonly="readonly"  th:value="${producto_edicion.estado}"  /><br/><br /></p>
 			<label>
-				<button type="submit" class="elim btn btn-warning" id='validar'>Guardar</button></label><br />
+				<button type="submit" class="elim btn btn-warning" id='validar' onclick="return ValidateNumeric();" >Guardar</button></label><br />
 		</form>
 	<p>
 		<a class ="btn btn-info" href="javascript:history.go(-1)">Volver</a>

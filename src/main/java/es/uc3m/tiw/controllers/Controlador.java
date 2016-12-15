@@ -231,7 +231,7 @@ public class Controlador {
 	}
 	
 	@RequestMapping(value = "/chat", method = RequestMethod.POST)
-	public String chatPost(Model modelo, @ModelAttribute Mensaje mensaje){
+	public String chatPost(HttpServletRequest request, Model modelo, @ModelAttribute Mensaje mensaje){
 		String correoDestino = mensaje.getCorreoDestino();
 		Cliente cliente = restTemplate.postForObject("http://localhost:8010/findByCorreo", correoDestino, Cliente.class);
 		if (cliente != null){
@@ -239,7 +239,8 @@ public class Controlador {
 			return "redirect:/chat";
 		}else{
 			modelo.addAttribute("error", "El correo de destino no existe");
-			return "chat";
+			//return "chat";
+			return this.chatGet(request, modelo);
 		}
 	}
 	

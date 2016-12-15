@@ -30,7 +30,15 @@
      function eliminar(){
     	 confirm("¿Está seguro de que quiere borrar este producto?");
      }
-     
+
+     function ValidateNumeric() {
+     	var val = document.getElementById("precio4").value;
+     	if (!(/^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/.test(val))) {
+     		alert("Por favor escriba un número valido.");
+     		return false;
+     	}
+     	return true;
+    	}
      </script>
 </head>
 <body>
@@ -104,13 +112,13 @@
 									<label>Descripcion&nbsp;&nbsp;&nbsp;
 										<input type="text" name="descripcion" class="descripcion" id="descripcion4" /><br /><br /></label><!-- th:field="*{descripcion}"  -->
 									<label>Imagen&nbsp;&nbsp;&nbsp;
-										<input id="imagen4" name="imagen" type="file" accept="image/*" /><br /><br /></label>
+										<input id="imagen4" name="image" type="file" accept="image/*" /><br /><br /></label>
 									<label>Precio&nbsp;&nbsp;&nbsp;
 										<input type="text" name="precio" class="precio" id="precio4" /><br /><br /></label><!--  th:field="*{precio}" -->
 									<label>Estado&nbsp;&nbsp;&nbsp;
 										<input type="text" name="estado"  class="estado" id="estado4" readonly="readonly" th:value="Disponible" /><br/><br /></label><!--   -->
 									<label>
-										<button type="submit" class='validar btn btn-info' id='validar'>Añadir</button></label><br />
+										<button type="submit" class='validar btn btn-info' id='validar'  onclick="return ValidateNumeric();">Añadir</button></label><br />
 								</td>   
 								</tr> 
 						</table>
