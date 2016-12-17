@@ -15,7 +15,7 @@
     	alert("Acaba de cerrar sesión. Se le redirigirá a la pantalla inicial de la aplicación.");
     	window.location = "login";
     }
-	
+
     function validacion(){
     	var titulo = document.getElementById("titulo").value;
     	var categoria = document.getElementById("categoria").value;
@@ -103,7 +103,10 @@
 			<p class='etiquetas'><b>Estado&nbsp;&nbsp;&nbsp;</b>
 				<input type="text" name="estado"  class="estado" id="estado" readonly="readonly"  th:value="${producto.estado}"  /><br/><br /></p>
 			<label>
+
 				<button type="submit" onclick="return validacion();" class='validar btn btn-warning' id='validar'>Guardar</button></label><br />
+
+				
 		</form>
 	<p>
 		<a class ="btn btn-info" href="javascript:history.go(-1)">Volver</a>
