@@ -8,6 +8,30 @@
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom styles for this template -->
     <link href="css/login.css" rel="stylesheet"/>
+    <script type="text/javascript">
+    
+    function validacion(){
+    	
+    	var email = document.getElementById("email").value;
+    	var contrasena = document.getElementById("password").value;
+    	var expresion = /^[a-z][\w.-]+@\w[\w.-]+\.[\w.-]*[a-z][a-z]$/i;
+    	
+    	if (email.length == 0){
+    		alert("Por favor introduce una dirección de correo electrónico");
+    		return false;
+    	}
+    	if (!expresion.test(email)){
+    		alert("Por favor introduce una dirección de correo electrónico válida");
+    		return false;
+    	}
+    	if (contrasena.length == 0){
+    		alert("Por favor introduce tu contraseña");
+    		return false;
+    	}
+    	return true;
+    }
+    
+    </script>
 </head>
 
 <body>

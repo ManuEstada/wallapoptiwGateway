@@ -20,6 +20,45 @@
 		confirm("¿Esta seguro que quiere darse de baja en la aplicación? Al hacerlo se le eliminaran automáticamente los productos que tiene puestos en su perfil.");
     }
 	
+    function validacion(){
+    	var email = document.getElementById("correo").value;
+    	var contras1 = document.getElementById("pass").value;
+    	var nombre = document.getElementById("name").value;
+    	var apellido = document.getElementById("apellido").value;
+    	var ciudad = document.getElementById("ciudad").value;
+    	
+    	var expresion = /^[a-z][\w.-]+@\w[\w.-]+\.[\w.-]*[a-z][a-z]$/i;
+    	
+    	if (email.length == 0){
+    		alert("Por favor introduce tu dirección de correo electrónico");
+    		return false;
+    	}
+    	if (!expresion.test(email)){
+    		alert("Por favor introduce una dirección de correo electrónico válida");
+    		return false;
+    	}
+    	
+    	if (contras1.length == 0){
+    		alert("Por favor introduce tu contraseña");
+    		return false;
+    	}
+    	
+    	if (nombre.length == 0){
+    		alert("Por favor introduce tu nombre");
+    		return false;
+    	}
+    	if (apellido.length == 0){
+    		alert("Por favor introduce tus apellidos");
+    		return false;
+    	}
+    	if (ciudad.length == 0) {
+            alert("Por favor introduce tu ciudad de residencia");
+    		return false;
+        }
+    	
+    	return true;
+    }
+    
 	</script>
 	
 </head>
@@ -77,7 +116,7 @@
 						<p class='etiquetas'><b>E-mail:&nbsp;&nbsp;&nbsp;</b><input type="text" class="email" tabindex="4" id='correo' readonly="readonly" name="correo" th:value="${cliente.correo}" /><br /><br /></p>
 						<p class='etiquetas' ><b>Contraseña:&nbsp;</b><input class="contrasena" type="text" tabindex="5" id ='pass' readonly="readonly" name="contrasena" th:value="${cliente.contrasena}" /><br /><br /></p>
 					</div>
-					<button class="elim btn btn-warning" type="submit" >Guardar</button>
+					<button onclick="return validacion();" class="elim btn btn-warning" type="submit" >Guardar</button>
 					</form>
 					<a class='btn btn-danger borrar' onclick="return eliminar();"  href="/loginNuevo" > 
 					Darse de baja en la aplicación</a>

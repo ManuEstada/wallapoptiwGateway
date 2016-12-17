@@ -20,6 +20,40 @@
 	confirm("¿Esta seguro que quiere darse de baja en la aplicación? Al hacerlo se le eliminaran automáticamente los productos que tiene puestos en su perfil.");
 	}
 	
+    function validacion(){
+    	
+    	var nombre = document.getElementById("name").value;
+    	var apellido = document.getElementById("apellido").value;
+    	var ciudad = document.getElementById("ciudad").value;
+    	var email = document.getElementById("correo").value;
+    	var expresion = /^[a-z][\w.-]+@\w[\w.-]+\.[\w.-]*[a-z][a-z]$/i;
+    	
+    	if (email.length == 0){
+    		alert("Por favor introduce una dirección de correo electrónico");
+    		return false;
+    	}
+    	if (!expresion.test(email)){
+    		alert("Por favor introduce una dirección de correo electrónico válida");
+    		return false;
+    	}
+    	if (nombre.length == 0){
+    		alert("Por favor introduce un nombre");
+    		return false;
+    	}
+    	if (apellido.length == 0){
+    		alert("Por favor introduce los apellidos");
+    		return false;
+    	}
+    	if (ciudad.length == 0) {
+            alert("Por favor introduce una ciudad de residencia");
+    		return false;
+        }
+    	return true;
+    	
+    	
+    }
+   
+	
 	</script>
 	
 </head>
@@ -59,7 +93,7 @@
 			<p class='etiquetas'><b>E-mail:&nbsp;&nbsp;&nbsp;</b>
 				<input type="text" class="email" tabindex="4" id='correo' readonly="readonly" th:value="${usuario_edicion.correo}" /><br /><br /></p>
 			
-			<button class="elim btn btn-warning" type="submit">Guardar</button>
+			<button onclick="return validacion();" class="elim btn btn-warning" type="submit">Guardar</button>
 		</form>
 	<p>
 		<a class ="btn btn-info" href="javascript:history.go(-1)">Volver</a>
