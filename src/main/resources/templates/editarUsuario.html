@@ -28,7 +28,7 @@
     	var email = document.getElementById("correo").value;
     	var expresion = /^[a-z][\w.-]+@\w[\w.-]+\.[\w.-]*[a-z][a-z]$/i;
     	
-    	if (email.length == 0){
+    	if (email == ""){
     		alert("Por favor introduce una dirección de correo electrónico");
     		return false;
     	}
@@ -36,15 +36,15 @@
     		alert("Por favor introduce una dirección de correo electrónico válida");
     		return false;
     	}
-    	if (nombre.length == 0){
+    	if (nombre == "" ){
     		alert("Por favor introduce un nombre");
     		return false;
     	}
-    	if (apellido.length == 0){
+    	if (apellido == "" ){
     		alert("Por favor introduce los apellidos");
     		return false;
     	}
-    	if (ciudad.length == 0) {
+    	if (ciudad == "" ) {
             alert("Por favor introduce una ciudad de residencia");
     		return false;
         }

@@ -61,17 +61,17 @@
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
 	
-	<form id="form_buscador" action="catalogo" method="post">
+	<form id="form_buscador" action="buscador" method="get">
 		<table id="buscador">
 			<tr><td id="celda1"><b>Búsqueda rápida de productos</b></td></tr> 
 			<tr id="fila2">
 			<td id="celda2">
-			<span>Buscar producto:<input type="text" name="texto" class="buscarProd" /></span>
+			<span>Buscar producto:<input type="text" name="text" class="buscarProd" /></span>
 			
 			<span><input type="submit" value="Buscar" id="buscar" class="buscar btn btn-primary" /></span><br /><br />
 			</td> 
 			</tr>
-			<tr ><td id="avanzada"><a class="avanzada" href="catalogo?avanzada=true">+ Búsqueda avanzada</a></td></tr>
+			<tr ><td id="avanzada"><a class="avanzada" href="catalogo">+ Búsqueda avanzada</a></td></tr>
 		</table><br /><br />
 	</form>
 	

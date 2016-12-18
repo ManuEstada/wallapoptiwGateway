@@ -33,6 +33,11 @@ public class Controlador {
 	@Autowired
 	private RestTemplate restTemplate;
 
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String startGet(){
+		return "login";
+	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginGet(){
 		return "login";
